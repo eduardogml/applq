@@ -1,0 +1,25 @@
+{
+  "name": "applq",
+  "version": "0.0.0",
+  "authors": [
+    "Eduardo Gomes de Moura Lima"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular": "1.3",
+    "bootstrap": "3.3",
+    "angular-route": "1.3",
+    "angular-resource": "1.3",
+    "angular-bootstrap": "~0.13.0"
+  },
+  "devDependencies": {
+    "angular-mocks": "1.3"
+  }
+}
