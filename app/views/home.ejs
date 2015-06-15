@@ -11,12 +11,14 @@
 
 	<title>APPLQ</title>
 </head>
-<body>
-	SERVIDOR APPLQ - PLANTAQUI APP - ON
+<body ng-controller="MainController">
+  {{titulo}}
+	
 	
 	<!-- build:js js/index.min.js -->
   	<script src="vendor/angular/angular.js"></script>
   	<script src="js/main.js"></script>
+    <script src="js/controllers/MainController.js"></script>
     <!-- endbuild -->
 </body>
 </html>
