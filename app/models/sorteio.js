@@ -1,3 +1,5 @@
+var mongoose = require('mongoose');
+
 function proximoSorteio(){
 
   var dataObj = new Date();
@@ -61,26 +63,25 @@ function proximoSorteio(){
   return dataObj;
 }
 
-var MongoClient = require('mongodb').MongoClient;
+module.exports = function() {
+  var schema = mongoose.Schema({
+    data: {
+      type: Date,
+      default: proximoSorteio()
+    },
+    status: {
+      type: String,
+      default: 'ANDAMENTO'
+    },
+    resultado: {
+      type: String,
+      default: ''
+    },
+    created_at: {
+      type: Date,
+      default: Date.now
+    }
+  });
 
-var sorteio = [
-  {data: proximoSorteio(), status: 'ANDAMENTO', resultado: '1234', created_at: Date.now},
-  {data: Date.now, status: 'FINALIZDO', resultado: '1234', created_at: Date.now}
-];
-
-MongoClient.connect('mongodb://127.0.0.1:27017/applq_test', 
-  function(erro, db) {
-    if(erro) throw err; 
-
-    db.dropDatabase(function(err) {
-       if(err) return console.log(err);
-       console.log('Banco apagado com sucesso')
-       db.collection('sorteios').insert(sorteio, 
-       function(err, inserted) {
-         if(err) return console.log(err);
-         console.log('Banco populado com sucesso')
-         process.exit(0);
-      });
-    });
-  }
-);
+  return mongoose.model('Sorteio', schema);
+};
