@@ -1,24 +1,38 @@
 language: node_js
 notifications:
-  - eduardogomesdemouralima@hotmail.com
+- eduardogomesdemouralima@hotmail.com
 node_js:
-  - 0.10
+- 0.1
 env:
   global:
-    - NODE_ENV: test
+  - NODE_ENV: test
 addons:
   sauce_connect: true
 before_install:
-  - npm install -g bower@1.3
-  - npm install -g grunt-cli@0.1
-  - npm install -g karma-cli@0.0
-  - npm install -g protractor@1.5
-  - webdriver-manager update  
-  - bower install
+- npm install -g bower@1.3
+- npm install -g grunt-cli@0.1
+- npm install -g karma-cli@0.0
+- npm install -g protractor@1.5
+- webdriver-manager update
+- bower install
 before_script:
-  - grunt
-  - cd dist
+- grunt minifica
 script:
- - karma start config/karma.config.js --single-run --browsers PhantomJS
- - node server &
- - protractor config/protractor.js
+- karma start config/karma.config.js --single-run --browsers PhantomJS
+- node server &
+- protractor config/protractor.js
+before_deploy:
+  - git config --global user.email 'travis@travis-ci.com'
+  - git config --global user.name 'Travis CI'
+  - git checkout $TRAVIS_BRANCH
+  - git add --all
+  - git commit -am "Travis commit"
+deploy:
+  provider: openshift
+  user: eduardogml.webmaster@gmail.com
+  password:
+    secure: VUN/4LPfaiEJlSmXJsq0/5xPvHnVe7iZN0wuI4o8lj1LvOl22f/iMBvNe0UE3TphUCzzlBJ9tFqR1CHid1iZcWlFDIs14KTnnMQbmQM7qrsacCMEO0Ev1S2OocZJ64z36KHzyU7w0my8nLi/cfJz2fHJj3HJjoKhupGZZ34Nqw657HEapKNa3tsUfu5OS0zZYbp/gO576JiZeGkKtCo56sa77iJFL7CgB6NQWbn3YvZljncT7Fmmm6aClSW9X0E5lGi6OhElFIYh4nN8StGir/ENYLXy8bLTHVhh+6Lx571P/B0xa1xQUMWY4RDwV6NgqeV7F6PuZVEyjsUuH+sbz4cMmEZzc4hRbCMebFVS6yGtvEwoPqMCAqAsBhGf5fmBsgx+UdM5ga4sAu813ea/EYUnxkO7iJIhNL4p+OSPzZwFCBQj6OGLfzbR5eY9ROBtnofcFtjwwjZZZNMu70FPyKMTS2Ead3dHixVsJ1ftN7miAKVWHGcSz2XxEIV72DvrZkgB0dtbTWuKA8zs44LNWjACJzr5vFLGwjzW0wtfJo/UKFlnYSf324RiCMLqAmyRY0LAHzgKfvDKLar9ItF5L6MWUTxqYTB4dQ9VZ1Ir65bQ12+litVh5GEMFlAGQAJxXRfZWxRV2w2/+IA4KOpYqndaWoAnEZfimzJ68zkXWuI=
+  app: applq
+  domain: applq-plantaqui.rhcloud.com
+  on:
+    repo: eduardogml/applq
