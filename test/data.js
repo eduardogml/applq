@@ -70,7 +70,7 @@ var sorteio = [
 
 MongoClient.connect('mongodb://127.0.0.1:27017/applq_test', 
   function(erro, db) {
-    if(erro) throw err; 
+    if(erro) throw erro; 
 
     db.dropDatabase(function(err) {
        if(err) return console.log(err);
