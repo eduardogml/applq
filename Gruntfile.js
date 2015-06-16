@@ -1,8 +1,10 @@
 module.exports = function(grunt) {
   grunt.initConfig({
+
     usemin : {
       html: 'app/views/**/*.ejs'
     },
+
     useminPrepare: {
       options: {
         root: 'public',
@@ -10,12 +12,14 @@ module.exports = function(grunt) {
       },
       html: 'app/views/**/*.ejs'
     },
+
     ngAnnotate: {
       scripts: {
         expand: true,
         src: ['public/js/**/*.js']
       },
     }
+    
   });
 
   grunt.registerTask('minifica', ['useminPrepare', 'ngAnnotate', 'concat', 'uglify', 'cssmin', 'usemin']);
