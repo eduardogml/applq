@@ -68,7 +68,7 @@ var sorteio = [
   {data: Date.now, status: 'FINALIZDO', resultado: '1234', created_at: Date.now}
 ];
 
-MongoClient.connect('mongodb://127.0.0.1:27017/applq_test', 
+MongoClient.connect('mongodb://localhost/applq_test', 
   function(erro, db) {
     if(erro) throw erro; 
 
