@@ -124,15 +124,15 @@ module.exports = function(app){
 								console.log(cupons);
 
 								var Cupon = app.models.cupon;
-								Cupon.create(cupons)
-								.then(
-									function(cupon) {
-										res.send(cupon);
-									}, 
-									function(erro) {
-										console.log(erro);
-										res.status(500).json(erro);
-									});
+								var promise1 = Cupon.create(cupons).exec();
+
+								
+								promise1.then(function(cupon) {
+									res.send(cupon);
+								}, function(erro) {
+									console.log(erro);
+									res.status(500).json(erro);
+								});
 
 							}, function(errPro0){
 								console.log(errPro0);
