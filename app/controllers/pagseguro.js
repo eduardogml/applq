@@ -4,6 +4,29 @@ module.exports = function(app){
 
 	var controller = {};
 
+	function gerarUmCupon(){
+		var a = '';
+		var b = '';
+		var c = '';
+		var d = '';
+
+		a = (Math.floor(Math.random() * 10)).toString();
+		b = (Math.floor(Math.random() * 10)).toString();
+		c = (Math.floor(Math.random() * 10)).toString();
+		d = (Math.floor(Math.random() * 10)).toString();
+
+		var numero = '';
+		numero = a + b + c + d;
+
+		var dados = { 
+	      "numero" : numero, 
+	      "created_at" : Date.now, 
+	      "the_sorteio" : null
+	    };
+
+	    return dados;
+	};
+
 	controller.reqCode = function(req, res){
 		var _qtd = req.params.qtd;
 		var js2xmlparser = require('js2xmlparser');
@@ -80,9 +103,6 @@ module.exports = function(app){
 
 	controller.notificationCode = function(req, res){
 		var request = require('request');
-		console.log('url: /pagseguronotificacao');
-		console.log('notificationCode');
-		console.log(req.body.notificationCode);
 		request({
 			url: 'https://ws.sandbox.pagseguro.uol.com.br/v3/transactions/notifications/'
 			+ req.body.notificationCode
@@ -99,6 +119,28 @@ module.exports = function(app){
 						console.log(err);
 						res.status(500).json(err);
 					}else{
+
+						if(result.transaction.status == 3 || result.transaction.status == '3'){
+							Transactionid.findOne({'id': result.transaction.code})
+							.exec()
+							.then(
+								function(transactionid){
+									for(i = 0; i <= transactionid.qtdmudas; i++){
+										var Cupon = app.models.cupon;
+										Cupon.create(gerarUmCupon()).then(function(cupon){
+											console.log('Criado cupon : ' + cupon._id);
+											transactionid.findOneAndUpdate(transactionid._id, {$push: {cupons: cupon}}, {safe: true, upsert: true}, function(e){console.log(e);});
+											// FIM transactionid.findOneAndUpdate()
+										}, function(er){
+											console.log(er);
+										}); // FIM then() in Cupon.create(gerarUmCupon())
+									}
+								},
+								function(erro){
+									console.log(erro)
+								});// FIM then() in Transactionid.findOne({'id': result.transaction.code})
+						}
+						
 						console.log('result.transaction.code');
 						console.log(result.transaction.code);
 						console.log('result.transaction.status');
