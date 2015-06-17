@@ -121,7 +121,7 @@ module.exports = function(app){
 					}else{
 
 						if(result.transaction.status == 3 || result.transaction.status == '3'){
-							console.log('Transactionid.findOne({'id': result.transaction.code})');
+							console.log('Transactionid.findOne({id: result.transaction.code})');
 							Transactionid.findOne({'id': result.transaction.code})
 							.exec()
 							.then(
@@ -138,7 +138,7 @@ module.exports = function(app){
 											console.log(er);
 										}); // FIM then() in Cupon.create(gerarUmCupon())
 									}
-									
+
 								},
 								function(erro){
 									console.log(erro)
