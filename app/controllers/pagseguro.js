@@ -195,8 +195,8 @@ module.exports = function(app){
 											.then(
 												function(cupon) {
 
-													transactionid.cupons = cupon;
-													Transactionid.findByIdAndUpdate(tranid, transactionid).exec()
+													var transacao = {cupons: cupon};
+													Transactionid.findByIdAndUpdate(tranid, transacao).exec()
 												     .then(
 												      function(transactionid0) {
 												        res.send(transactionid0);
@@ -240,8 +240,8 @@ module.exports = function(app){
 											.then(
 												function(cupon) {
 													
-													transactionid.cupons = cupon;
-													Transactionid.findByIdAndUpdate(tranid, transactionid).exec()
+													var transacao = {cupons: cupon};
+													Transactionid.findByIdAndUpdate(tranid, transacao).exec()
 												     .then(
 												      function(transactionid0) {
 												        res.send(transactionid0);
