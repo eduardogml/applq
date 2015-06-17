@@ -121,32 +121,17 @@ module.exports = function(app){
 					}else{
 
 						if(result.transaction.status == 3 || result.transaction.status == '3'){
-							console.log('Transactionid.findOne({id: result.transaction.code})');
-							Transactionid.find({'id': result.transaction.code})
-							.populate('cupons')
-							.exec()
-							.then(
-								function(transactionid){
-									var Cupon = app.models.cupon;
 
-									for(i = 0; i <= transactionid.qtdmudas; i++){
-										var novo = {};
-										novo = gerarUmCupon();
-										console.log(novo);
-										Cupon.create(novo).then(function(cupon){
-											console.log('Criado cupon : ' + cupon._id);
-											transactionid.findOneAndUpdate(transactionid._id, {$push: {cupons: cupon}}, {safe: true, upsert: true}, function(e){console.log(e);});
-											res.send('Transactionid OK');
-											// FIM transactionid.findOneAndUpdate()
-										}, function(er){
-											console.log(er);
-										}); // FIM then() in Cupon.create(gerarUmCupon())
-									}
-
-								},
-								function(erro){
-									console.log(erro)
-								});// FIM then() in Transactionid.findOne({'id': result.transaction.code})
+							query = {id: result.transaction.code};
+							var promise0 = Transactionid.findOne(query).exec();
+							promise0.then(function(transactionid){
+								console.log('Executado promise0');
+								console.log(transactionid._id);
+								console.log(transactionid.qtdmudas);
+								res.send(transactionid);
+							}, function(errPro0){
+								console.log(errPro0);
+							});
 						}
 					}
 				});// FIM parseString()
