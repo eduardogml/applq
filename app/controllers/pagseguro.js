@@ -122,14 +122,18 @@ module.exports = function(app){
 
 						if(result.transaction.status == 3 || result.transaction.status == '3'){
 							console.log('Transactionid.findOne({id: result.transaction.code})');
-							Transactionid.findOne({'id': result.transaction.code})
+							Transactionid.find({'id': result.transaction.code})
+							.populate('cupons')
 							.exec()
 							.then(
 								function(transactionid){
 									var Cupon = app.models.cupon;
 
 									for(i = 0; i <= transactionid.qtdmudas; i++){
-										Cupon.create(gerarUmCupon()).then(function(cupon){
+										var novo = {};
+										novo = gerarUmCupon();
+										console.log(novo);
+										Cupon.create(novo).then(function(cupon){
 											console.log('Criado cupon : ' + cupon._id);
 											transactionid.findOneAndUpdate(transactionid._id, {$push: {cupons: cupon}}, {safe: true, upsert: true}, function(e){console.log(e);});
 											res.send('Transactionid OK');
