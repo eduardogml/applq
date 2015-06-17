@@ -64,6 +64,7 @@ function proximoSorteio(){
 }
 
 module.exports = function() {
+  
   var schema = mongoose.Schema({
     data: {
       type: Date,
