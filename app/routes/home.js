@@ -1,5 +1,6 @@
 module.exports = function(app){
 	app.get('/', function(req, res){
+		/*
 		var request = require('request');
 		request.post({
 			url: 'https://api.directcallsoft.com/request_token',
@@ -24,7 +25,7 @@ module.exports = function(app){
 			}, function(err2, httpRes2, body2){
 				console.log(body2);
 			});
-		});
+		});*/
 
 		res.render('home');
 	});
