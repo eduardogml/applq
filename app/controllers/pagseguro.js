@@ -4,34 +4,6 @@ module.exports = function(app){
 
 	var controller = {};
 
-	function gerarCupons(qtd){
-		var cupons = [];
-
-		for(i = 0; i <= qtd; i++){
-			var a = '';
-			var b = '';
-			var c = '';
-			var d = '';
-
-			a = (Math.floor(Math.random() * 10)).toString();
-			b = (Math.floor(Math.random() * 10)).toString();
-			c = (Math.floor(Math.random() * 10)).toString();
-			d = (Math.floor(Math.random() * 10)).toString();
-
-			var numero = '';
-			numero = a + b + c + d;
-
-			var dados = { 
-		      "numero" : numero, 
-		      "created_at" : Date.now, 
-		      "the_sorteio" : null
-		    };
-		    cupons.push(dados);
-		}
-
-	    return cupons;
-	};
-
 	controller.reqCode = function(req, res){
 		var _qtd = req.params.qtd;
 		var js2xmlparser = require('js2xmlparser');
@@ -131,11 +103,28 @@ module.exports = function(app){
 							var promise0 = Transactionid.findOne(query).exec();
 
 							promise0.then(function(transactionid){
-								var novos = gerarCupons();
-								console.log(novos);
+								var cupons = [];
+								for(i = 0; i <= transactionid.qtdmudas; i++){
+									var a = '';var b = '';var c = '';var d = '';
+
+									a = (Math.floor(Math.random() * 10)).toString();
+									b = (Math.floor(Math.random() * 10)).toString();
+									c = (Math.floor(Math.random() * 10)).toString();
+									d = (Math.floor(Math.random() * 10)).toString();
+									var numero = '';
+									numero = a + b + c + d;
+									var dados = {};
+									dados = { 
+								      numero : numero, 
+								      created_at : new Date(), 
+								      the_sorteio : null
+								    };
+								    cupons.push(dados);
+								}
+								console.log(cupons);
 
 								var Cupon = app.models.cupon;
-								Cupon.create(novos)
+								Cupon.create(cupons)
 								.then(
 									function(cupon) {
 										res.send(cupon);
@@ -148,7 +137,7 @@ module.exports = function(app){
 							}, function(errPro0){
 								console.log(errPro0);
 							});
-							
+
 						}
 					}
 				});// FIM parseString()
