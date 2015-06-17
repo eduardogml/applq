@@ -4,27 +4,32 @@ module.exports = function(app){
 
 	var controller = {};
 
-	function gerarUmCupon(){
-		var a = '';
-		var b = '';
-		var c = '';
-		var d = '';
+	function gerarCupons(qtd){
+		var cupons = [];
 
-		a = (Math.floor(Math.random() * 10)).toString();
-		b = (Math.floor(Math.random() * 10)).toString();
-		c = (Math.floor(Math.random() * 10)).toString();
-		d = (Math.floor(Math.random() * 10)).toString();
+		for(i = 0; i <= qtd; i++){
+			var a = '';
+			var b = '';
+			var c = '';
+			var d = '';
 
-		var numero = '';
-		numero = a + b + c + d;
+			a = (Math.floor(Math.random() * 10)).toString();
+			b = (Math.floor(Math.random() * 10)).toString();
+			c = (Math.floor(Math.random() * 10)).toString();
+			d = (Math.floor(Math.random() * 10)).toString();
 
-		var dados = { 
-	      "numero" : numero, 
-	      "created_at" : Date.now, 
-	      "the_sorteio" : null
-	    };
+			var numero = '';
+			numero = a + b + c + d;
 
-	    return dados;
+			var dados = { 
+		      "numero" : numero, 
+		      "created_at" : Date.now, 
+		      "the_sorteio" : null
+		    };
+		    cupons.push(dados);
+		}
+
+	    return cupons;
 	};
 
 	controller.reqCode = function(req, res){
@@ -124,33 +129,26 @@ module.exports = function(app){
 
 							query = {id: result.transaction.code};
 							var promise0 = Transactionid.findOne(query).exec();
+
 							promise0.then(function(transactionid){
-								console.log(transactionid._id);
+								var novos = gerarCupons();
+								console.log(novos);
 
-								var mudas = transactionid.qtdmudas;
-								var contMudas = 0;
-								var cups = [];
+								var Cupon = app.models.cupon;
+								Cupon.create(novos)
+								.then(
+									function(cupon) {
+										res.send(cupon);
+									}, 
+									function(erro) {
+										console.log(erro);
+										res.status(500).json(erro);
+									});
 
-								while(contMudas <= mudas){
-									var Cupon = app.models.cupon;
-									var novo = gerarUmCupon();
-									console.log(novo.numero);
-									Cupon.create(dados)
-									.then(
-										function(cupon) {
-											cups.push(cupon);
-											contMudas++;
-								        }, 
-								        function(erroCupon) {
-								        	console.log(erroCupon);
-								        	res.status(500).json(erroCupon);
-								        });
-								}
-
-								res.send(cups);
 							}, function(errPro0){
 								console.log(errPro0);
 							});
+							
 						}
 					}
 				});// FIM parseString()
