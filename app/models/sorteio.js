@@ -4,7 +4,7 @@ function proximoSorteio(){
 
   var dataObj = new Date();
   var hoje = dataObj.getDay();
-  var horaDoSorteio = 16;
+  var horaDoSorteio = 19;
   var minDoSorteio = 00;
   var segDoSorteio = 00;
 

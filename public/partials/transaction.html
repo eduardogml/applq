@@ -1,0 +1,48 @@
+<h1 class="text-center">Transação de ID nº {{transactionid.id}}</h1>
+<p ng-show="mensagem.texto">
+	{{mensagem.texto}}
+</p>
+
+<form ng-submit="salva()">
+	<div class="form-group">
+		<label for="nome">QTD Mudas</label>
+		<input type="text" class="form-control" id="qtdmudas" 
+		name="qtdmudas" required ng-model="transactionid.qtdmudas">
+	</div>
+
+	<div class="form-group">
+		<label for="email">Facebook Name</label>
+		<div class="input-group">
+			<input type="text" class="form-control" id="facebookname" placeholder="facebookname" name="facebookname" ng-model="transactionid.facebookname">
+		</div>
+	</div>
+
+	<div class="form-group">
+		<label for="email">Facebook ID para App</label>
+		<div class="input-group">
+			<input type="text" class="form-control" id="facebookidapp" placeholder="facebookidapp" name="facebookidapp" ng-model="transactionid.facebookidapp">
+		</div>
+	</div>
+
+	<div class="form-group">
+		<label for="email">Facebook Email</label>
+		<span class="input-group-addon">@</span>
+		<div class="input-group">
+			<input type="email" class="form-control" id="facebookemail" placeholder="facebookemail" name="facebookemail" ng-model="transactionid.facebookemail">
+		</div>
+	</div>
+
+	<div class="form-group">
+		<label for="email">Facebook Link</label>
+		<div class="input-group">
+			<input type="text" class="form-control" id="facebooklink" placeholder="facebooklink" name="facebooklink" ng-model="transactionid.facebooklink">
+		</div>
+	</div>
+
+	<div class="form-group">
+	  <label for="cupons">Cupons</label>
+	  <ul>
+	  	<li ng-repeat="cupon in cupons">{{cupon.numero}} - {{cupon.the_sorteio}}</li>
+	  </ul>
+	</div>
+</form>
