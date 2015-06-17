@@ -125,10 +125,29 @@ module.exports = function(app){
 							query = {id: result.transaction.code};
 							var promise0 = Transactionid.findOne(query).exec();
 							promise0.then(function(transactionid){
-								console.log('Executado promise0');
 								console.log(transactionid._id);
-								console.log(transactionid.qtdmudas);
-								res.send(transactionid);
+
+								var mudas = transactionid.qtdmudas;
+								var contMudas = 0;
+								var cups = [];
+
+								while(contMudas <= mudas){
+									var Cupon = app.models.cupon;
+									var novo = gerarUmCupon();
+									console.log(novo.numero);
+									Cupon.create(dados)
+									.then(
+										function(cupon) {
+											cups.push(cupon);
+											contMudas++;
+								        }, 
+								        function(erroCupon) {
+								        	console.log(erroCupon);
+								        	res.status(500).json(erroCupon);
+								        });
+								}
+
+								res.send(cups);
 							}, function(errPro0){
 								console.log(errPro0);
 							});
