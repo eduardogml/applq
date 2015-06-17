@@ -104,6 +104,8 @@ module.exports = function(app){
 
 							promise0.then(function(transactionid){
 
+								var tranid = transactionid._id;
+
 
 								var dataObj = new Date();
 								  var hoje = dataObj.getDay();
@@ -192,7 +194,18 @@ module.exports = function(app){
 											Cupon.create(cupons)
 											.then(
 												function(cupon) {
-													res.send(cupon);
+
+													transactionid.cupons = cupon;
+													Transactionid.findByIdAndUpdate(tranid, transactionid).exec()
+												     .then(
+												      function(transactionid0) {
+												        res.send(transactionid0);
+												      }, 
+												      function(erro) {
+												        console.error(erro);
+												      }
+												     );
+
 												}, 
 												function(erro) {
 													console.log(erro);
@@ -226,7 +239,18 @@ module.exports = function(app){
 											Cupon.create(cupons)
 											.then(
 												function(cupon) {
-													res.send(cupon);
+													
+													transactionid.cupons = cupon;
+													Transactionid.findByIdAndUpdate(tranid, transactionid).exec()
+												     .then(
+												      function(transactionid0) {
+												        res.send(transactionid0);
+												      }, 
+												      function(erro) {
+												        console.error(erro);
+												      }
+												     );
+
 												}, 
 												function(erro) {
 													console.log(erro);
