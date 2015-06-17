@@ -106,7 +106,6 @@ module.exports = function(app){
 								var cupons = [];
 								for(i = 0; i <= transactionid.qtdmudas; i++){
 									var a = '';var b = '';var c = '';var d = '';
-
 									a = (Math.floor(Math.random() * 10)).toString();
 									b = (Math.floor(Math.random() * 10)).toString();
 									c = (Math.floor(Math.random() * 10)).toString();
@@ -118,21 +117,21 @@ module.exports = function(app){
 								      numero : numero, 
 								      created_at : new Date(), 
 								      the_sorteio : null
-								    };
+								    };								    
 								    cupons.push(dados);
 								}
 								console.log(cupons);
 
 								var Cupon = app.models.cupon;
-								var promise1 = Cupon.create(cupons).exec();
-
-								
-								promise1.then(function(cupon) {
-									res.send(cupon);
-								}, function(erro) {
-									console.log(erro);
-									res.status(500).json(erro);
-								});
+								Cupon.create(cupons)
+								.then(
+									function(cupon) {
+										res.send(cupon);
+									}, 
+									function(erro) {
+										console.log(erro);
+										res.status(500).json(erro);
+									});
 
 							}, function(errPro0){
 								console.log(errPro0);
