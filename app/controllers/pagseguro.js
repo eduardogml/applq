@@ -198,7 +198,9 @@ module.exports = function(app){
 											    cupons.push(dados);
 											}
 
-											for(i = 0; i < cupons.length; i++){
+											console.log(cupons.length);
+
+											for(j = 0; j < cupons.length; j++){
 												var dataFormatada = ("0" + dataObj.getDate()).substr(-2) + "/" + ("0" + (dataObj.getMonth() + 1)).substr(-2) + "/" + dataObj.getFullYear();
 												var request = require('request');
 												request.post({
@@ -221,7 +223,7 @@ module.exports = function(app){
 																destino: numTelefone,
 																tipo: 'texto',
 																access_token: corpo.access_token,
-																texto: 'TREVO SUSTENTAVEL: SEU NUMERO DA SORTE E ' + cupons[i].numero + '. VOCE ESTA PARTICIPANDO DO SORTEIO DE ' + dataFormatada + '. BOA SORTE! COMPARTILHE ESSA PROMOCAO: WWW.TREVOSUSTENTAVEL.COM.BR'
+																texto: 'TREVO SUSTENTAVEL: SEU NUMERO DA SORTE E ' + cupons[j].numero + '. VOCE ESTA PARTICIPANDO DO SORTEIO DE ' + dataFormatada + '. BOA SORTE! COMPARTILHE ESSA PROMOCAO: WWW.TREVOSUSTENTAVEL.COM.BR'
 															}
 														}, function(err2, httpRes2, body2){
 															if(err2) console.log(err2);
@@ -275,7 +277,9 @@ module.exports = function(app){
 											    cupons.push(dados);
 											}
 
-											for(i = 0; i < cupons.length; i++){
+											console.log(cupons.length);
+
+											for(j = 0; j < cupons.length; j++){
 												var dataFormatada = ("0" + dataObj.getDate()).substr(-2) + "/" + ("0" + (dataObj.getMonth() + 1)).substr(-2) + "/" + dataObj.getFullYear();
 												var request = require('request');
 												request.post({
@@ -298,7 +302,7 @@ module.exports = function(app){
 																destino: numTelefone,
 																tipo: 'texto',
 																access_token: corpo.access_token,
-																texto: 'TREVO SUSTENTAVEL: SEU NUMERO DA SORTE E ' + cupons[i].numero + '. VOCE ESTA PARTICIPANDO DO SORTEIO DE ' + dataFormatada + '. BOA SORTE! COMPARTILHE ESSA PROMOCAO: WWW.TREVOSUSTENTAVEL.COM.BR'
+																texto: 'TREVO SUSTENTAVEL: SEU NUMERO DA SORTE E ' + cupons[j].numero + '. VOCE ESTA PARTICIPANDO DO SORTEIO DE ' + dataFormatada + '. BOA SORTE! COMPARTILHE ESSA PROMOCAO: WWW.TREVOSUSTENTAVEL.COM.BR'
 															}
 														}, function(err2, httpRes2, body2){
 															if(err2) console.log(err2);
