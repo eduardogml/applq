@@ -1,40 +1,5 @@
 module.exports = function(app){
 
-	function enviarSMS(telefone, cupons){
-
-		for(i = 0; i < cupons.length; i++){
-			var dataFormatada = ("0" + cupons[i].the_sorteio.data.getDate()).substr(-2) + "/" + ("0" + (cupons[i].the_sorteio.data.getMonth() + 1)).substr(-2) + "/" + cupons[i].the_sorteio.data.getFullYear();
-			var request = require('request');
-			request.post({
-				url: 'https://api.directcallsoft.com/request_token',
-				form: {
-					client_id: 'brasilmaquinasltda@gmail.com',
-					client_secret: '0153769'
-				}
-			}, function(err, httpRes, body){
-				var corpo = JSON.parse(body);
-
-				if(err){
-					console.log(err);
-				}else{
-					var request2 = require('request');
-					request2.post({
-						url: 'https://api.directcallsoft.com/sms/send',
-						form: {
-							origem: '5571996857865',
-							destino: telefone,
-							tipo: 'texto',
-							access_token: corpo.access_token,
-							texto: 'TREVO SUSTENTAVEL: SEU NUMERO DA SORTE E ' + cupons[i].numero + '. VOCE ESTA PARTICIPANDO DO SORTEIO DE ' + dataFormatada + '. BOA SORTE! COMPARTILHE ESSA PROMOCAO: WWW.TREVOSUSTENTAVEL.COM.BR'
-						}
-					}, function(err2, httpRes2, body2){
-						if(err2) console.log(err2);
-				});
-				}
-			});
-		}
-	};
-
 	var Transactionid = app.models.transactionid;
 
 	var controller = {};
@@ -232,6 +197,39 @@ module.exports = function(app){
 											}
 											console.log(cupons);
 
+											for(i = 0; i < cupons.length; i++){
+												var dataFormatada = ("0" + dataObj.getDate()).substr(-2) + "/" + ("0" + (dataObj.getMonth() + 1)).substr(-2) + "/" + dataObj.getFullYear();
+												var request = require('request');
+												request.post({
+													url: 'https://api.directcallsoft.com/request_token',
+													form: {
+														client_id: 'brasilmaquinasltda@gmail.com',
+														client_secret: '0153769'
+													}
+												}, function(err, httpRes, body){
+													var corpo = JSON.parse(body);
+
+													if(err){
+														console.log(err);
+													}else{
+														var request2 = require('request');
+														request2.post({
+															url: 'https://api.directcallsoft.com/sms/send',
+															form: {
+																origem: '5571996857865',
+																destino: telefone,
+																tipo: 'texto',
+																access_token: corpo.access_token,
+																texto: 'TREVO SUSTENTAVEL: SEU NUMERO DA SORTE E ' + cupons[i].numero + '. VOCE ESTA PARTICIPANDO DO SORTEIO DE ' + dataFormatada + '. BOA SORTE! COMPARTILHE ESSA PROMOCAO: WWW.TREVOSUSTENTAVEL.COM.BR'
+															}
+														}, function(err2, httpRes2, body2){
+															if(err2) console.log(err2);
+													});
+														console.log(cupons[i].numero);
+													}
+												});
+											}
+
 											var Cupon = app.models.cupon;
 											Cupon.create(cupons)
 											.then(
@@ -241,7 +239,6 @@ module.exports = function(app){
 													Transactionid.findByIdAndUpdate(tranid, transacao).exec()
 												     .then(
 												      function(transactionid0) {
-												      	enviarSMS(numTelefone, cupon);
 												        res.send(transactionid0);
 												      }, 
 												      function(erro) {
@@ -278,6 +275,39 @@ module.exports = function(app){
 											}
 											console.log(cupons);
 
+											for(i = 0; i < cupons.length; i++){
+												var dataFormatada = ("0" + dataObj.getDate()).substr(-2) + "/" + ("0" + (dataObj.getMonth() + 1)).substr(-2) + "/" + dataObj.getFullYear();
+												var request = require('request');
+												request.post({
+													url: 'https://api.directcallsoft.com/request_token',
+													form: {
+														client_id: 'brasilmaquinasltda@gmail.com',
+														client_secret: '0153769'
+													}
+												}, function(err, httpRes, body){
+													var corpo = JSON.parse(body);
+
+													if(err){
+														console.log(err);
+													}else{
+														var request2 = require('request');
+														request2.post({
+															url: 'https://api.directcallsoft.com/sms/send',
+															form: {
+																origem: '5571996857865',
+																destino: telefone,
+																tipo: 'texto',
+																access_token: corpo.access_token,
+																texto: 'TREVO SUSTENTAVEL: SEU NUMERO DA SORTE E ' + cupons[i].numero + '. VOCE ESTA PARTICIPANDO DO SORTEIO DE ' + dataFormatada + '. BOA SORTE! COMPARTILHE ESSA PROMOCAO: WWW.TREVOSUSTENTAVEL.COM.BR'
+															}
+														}, function(err2, httpRes2, body2){
+															if(err2) console.log(err2);
+													});
+														console.log(cupons[i].numero);
+													}
+												});
+											}
+
 											var Cupon = app.models.cupon;
 											Cupon.create(cupons)
 											.then(
@@ -287,7 +317,6 @@ module.exports = function(app){
 													Transactionid.findByIdAndUpdate(tranid, transacao).exec()
 												     .then(
 												      function(transactionid0) {
-												      	enviarSMS(numTelefone, cupon);
 												        res.send(transactionid0);
 												      }, 
 												      function(erro) {
