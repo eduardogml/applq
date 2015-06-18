@@ -180,7 +180,7 @@ module.exports = function(app){
 								promise.then(function(sorteio){
 									if(sorteio) {
 										var cupons = [];
-											for(i = 0; i <= transactionid.qtdmudas; i++){
+											for(i = 0; i < transactionid.qtdmudas; i++){
 												var a = '';var b = '';var c = '';var d = '';
 												a = (Math.floor(Math.random() * 10)).toString();
 												b = (Math.floor(Math.random() * 10)).toString();
@@ -261,7 +261,7 @@ module.exports = function(app){
 								      .then(
 								        function(sort) {
 								          var cupons = [];
-											for(i = 0; i <= transactionid.qtdmudas; i++){
+											for(i = 0; i < transactionid.qtdmudas; i++){
 												var a = '';var b = '';var c = '';var d = '';
 												a = (Math.floor(Math.random() * 10)).toString();
 												b = (Math.floor(Math.random() * 10)).toString();
