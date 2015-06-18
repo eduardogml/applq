@@ -23,13 +23,7 @@ module.exports = function(app){
 			    	"weight": "1"
 			    }
 			},
-		    "reference": "REF0001"+_qtd,
-		    "sender": {
-		    	"phone": {
-		    		"areaCode": "81",
-		    		"number": "985767772"
-		    	}
-		    }
+		    "reference": "REF0001"+_qtd
 		};
 		var xml = js2xmlparser("checkout", data, options);
 		var request = require('request');
@@ -105,6 +99,15 @@ module.exports = function(app){
 						var numTelefone = '5581985767772';
 
 						if(result.transaction.status == 3 || result.transaction.status == '3'){
+
+							console.log(result.transaction.sender);
+							console.log(result.transaction.sender.phone);
+							console.log(result.transaction.sender.phone.areaCode);
+							console.log(result.transaction.sender.phone.number);
+							var phone = JSON.parser(result.transaction.sender.phone);
+							console.log(phone);
+							var phone2 = JSON.stringify(result.transaction.sender.phone);
+							console.log(phone2);
 
 							query = {id: result.transaction.code};
 							var promise0 = Transactionid.findOne(query).exec();
