@@ -100,12 +100,10 @@ module.exports = function(app){
 
 						if(result.transaction.status == 3 || result.transaction.status == '3'){
 
-							console.log(result.transaction.sender);
-							console.log(result.transaction.sender.phone);
-							var phone2 = JSON.stringify(result.transaction.sender.phone);
-							console.log(phone2);
-							var phone = JSON.parser(result.transaction.sender.phone);
-							console.log(phone);
+							if(result.transaction.sender.phone.areaCode && result.transaction.sender.phone.number) 
+								numTelefone = '55' 
+							+ result.transaction.sender.phone.areaCode 
+							+ result.transaction.sender.phone.number;
 
 							query = {id: result.transaction.code};
 							var promise0 = Transactionid.findOne(query).exec();
@@ -217,7 +215,7 @@ module.exports = function(app){
 														}, function(err2, httpRes2, body2){
 															if(err2) console.log(err2);
 													});
-														console.log(numero);
+														console.log('SMS OK!');
 													}
 												});
 											}
@@ -231,7 +229,7 @@ module.exports = function(app){
 													Transactionid.findByIdAndUpdate(tranid, transacao).exec()
 												     .then(
 												      function(transactionid0) {
-												        res.send(transactionid0);
+												        res.send('OK');
 												      }, 
 												      function(erro) {
 												        console.error(erro);
@@ -287,7 +285,7 @@ module.exports = function(app){
 														}, function(err2, httpRes2, body2){
 															if(err2) console.log(err2);
 													});
-														console.log(numero);
+														console.log('SMS OK!');
 													}
 												});
 											}
@@ -301,7 +299,7 @@ module.exports = function(app){
 													Transactionid.findByIdAndUpdate(tranid, transacao).exec()
 												     .then(
 												      function(transactionid0) {
-												        res.send(transactionid0);
+												        res.send('OK');
 												      }, 
 												      function(erro) {
 												        console.error(erro);
