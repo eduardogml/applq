@@ -220,6 +220,8 @@ module.exports = function(app){
 													}else{
 														console.log('cupons[j]');
 														console.log(cupons[j]);
+														console.log('cupons[0]');
+														console.log(cupons[0]);
 														var request2 = require('request');
 														request2.post({
 															url: 'https://api.directcallsoft.com/sms/send',
@@ -228,7 +230,7 @@ module.exports = function(app){
 																destino: numTelefone,
 																tipo: 'texto',
 																access_token: corpo.access_token,
-																texto: 'TREVO SUSTENTAVEL: SEU NUMERO DA SORTE E ' + cupons[j].numero + '. VOCE ESTA PARTICIPANDO DO SORTEIO DE ' + dataFormatada + '. BOA SORTE! COMPARTILHE ESSA PROMOCAO: WWW.TREVOSUSTENTAVEL.COM.BR'
+																texto: 'TREVO SUSTENTAVEL: SEU NUMERO DA SORTE E . VOCE ESTA PARTICIPANDO DO SORTEIO DE . BOA SORTE! COMPARTILHE ESSA PROMOCAO: WWW.TREVOSUSTENTAVEL.COM.BR'
 															}
 														}, function(err2, httpRes2, body2){
 															if(err2) console.log(err2);
