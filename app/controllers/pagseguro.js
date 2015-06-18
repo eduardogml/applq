@@ -102,11 +102,10 @@ module.exports = function(app){
 						console.log(err);
 						res.status(500).json(err);
 					}else{
-						console.log(result.transaction);
 						console.log(result.transaction.sender);
 						console.log(result.transaction.sender.phone);
-						console.log(result.transaction.sender.phone.areaCode);
-						console.log(result.transaction.sender.phone.number);
+						var fone = JSON.parse(result.transaction.sender.phone);
+						console.log(fone);
 						var numTelefone = result.transaction.sender.phone.areaCode + result.transaction.sender.phone.number;
 
 						if(result.transaction.status == 3 || result.transaction.status == '3'){
