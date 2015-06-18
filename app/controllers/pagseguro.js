@@ -179,7 +179,6 @@ module.exports = function(app){
 								var promise = Sorteio.findOne(query2).exec();
 								promise.then(function(sorteio){
 									if(sorteio) {
-										console.log('sorteio existe');
 										var cupons = [];
 											for(i = 0; i <= transactionid.qtdmudas; i++){
 												var a = '';var b = '';var c = '';var d = '';
@@ -198,6 +197,9 @@ module.exports = function(app){
 											    cupons.push(dados);
 											}
 
+											console.log('cupons');
+											console.log(cupons);
+											console.log('cupons.length');
 											console.log(cupons.length);
 
 											for(j = 0; j < cupons.length; j++){
@@ -255,7 +257,6 @@ module.exports = function(app){
 													res.status(500).json(erro);
 												});
 								    } else {
-								    	console.log('sorteio nao existe');
 								      Sorteio.create({data: dataObj})
 								      .then(
 								        function(sort) {
@@ -277,6 +278,9 @@ module.exports = function(app){
 											    cupons.push(dados);
 											}
 
+											console.log('cupons');
+											console.log(cupons);
+											console.log('cupons.length');
 											console.log(cupons.length);
 
 											for(j = 0; j < cupons.length; j++){
