@@ -102,12 +102,10 @@ module.exports = function(app){
 
 							console.log(result.transaction.sender);
 							console.log(result.transaction.sender.phone);
-							console.log(result.transaction.sender.phone.areaCode);
-							console.log(result.transaction.sender.phone.number);
-							var phone = JSON.parser(result.transaction.sender.phone);
-							console.log(phone);
 							var phone2 = JSON.stringify(result.transaction.sender.phone);
 							console.log(phone2);
+							var phone = JSON.parser(result.transaction.sender.phone);
+							console.log(phone);
 
 							query = {id: result.transaction.code};
 							var promise0 = Transactionid.findOne(query).exec();
