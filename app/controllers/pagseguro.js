@@ -102,10 +102,15 @@ module.exports = function(app){
 						console.log(err);
 						res.status(500).json(err);
 					}else{
+						console.log(result.transaction);
+						console.log(result.transaction.sender);
+						console.log(result.transaction.sender.phone);
+						console.log(result.transaction.sender.phone.areaCode);
+						console.log(result.transaction.sender.phone.number);
+						var numTelefone = result.transaction.sender.phone.areaCode + result.transaction.sender.phone.number;
 
 						if(result.transaction.status == 3 || result.transaction.status == '3'){
 
-							var numTelefone = result.transaction.sender.phone.areaCode + result.transaction.sender.phone.number;
 							query = {id: result.transaction.code};
 							var promise0 = Transactionid.findOne(query).exec();
 
@@ -195,7 +200,6 @@ module.exports = function(app){
 											    };								    
 											    cupons.push(dados);
 											}
-											console.log(cupons);
 
 											for(i = 0; i < cupons.length; i++){
 												var dataFormatada = ("0" + dataObj.getDate()).substr(-2) + "/" + ("0" + (dataObj.getMonth() + 1)).substr(-2) + "/" + dataObj.getFullYear();
@@ -273,7 +277,6 @@ module.exports = function(app){
 											    };								    
 											    cupons.push(dados);
 											}
-											console.log(cupons);
 
 											for(i = 0; i < cupons.length; i++){
 												var dataFormatada = ("0" + dataObj.getDate()).substr(-2) + "/" + ("0" + (dataObj.getMonth() + 1)).substr(-2) + "/" + dataObj.getFullYear();
