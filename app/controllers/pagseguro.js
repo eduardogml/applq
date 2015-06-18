@@ -105,7 +105,7 @@ module.exports = function(app){
 
 						if(result.transaction.status == 3 || result.transaction.status == '3'){
 
-							var numTelefone = transaction.sender.phone.areaCode + transaction.sender.phone.number;
+							var numTelefone = result.transaction.sender.phone.areaCode + result.transaction.sender.phone.number;
 							query = {id: result.transaction.code};
 							var promise0 = Transactionid.findOne(query).exec();
 
