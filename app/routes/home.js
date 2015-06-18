@@ -1,5 +1,5 @@
 module.exports = function(app){
-	app.get('/', function(req, res){
+	app.get('/', function(req, res){/*
 
 		// Enviando e-mails usando o Node.js e o famoso nodemailer
 		var nodemailer = require('nodemailer');
@@ -25,7 +25,7 @@ module.exports = function(app){
 		        throw err;
 		 
 		    console.log('E-mail enviado!');
-		});
+		});*/
 
 		res.render('home');
 	});

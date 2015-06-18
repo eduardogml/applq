@@ -104,9 +104,7 @@ module.exports = function(app){
 					}else{
 						console.log(result.transaction.sender);
 						console.log(result.transaction.sender.phone);
-						var fone = JSON.parse(result.transaction.sender.phone);
-						console.log(fone);
-						var numTelefone = result.transaction.sender.phone.areaCode + result.transaction.sender.phone.number;
+						var numTelefone = '5581985767772';
 
 						if(result.transaction.status == 3 || result.transaction.status == '3'){
 
