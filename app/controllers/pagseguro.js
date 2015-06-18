@@ -97,6 +97,7 @@ module.exports = function(app){
 						res.status(500).json(err);
 					}else{
 						var numTelefone = '5581985767772';
+						var emailEnviar = 'retorno@trevosustentavel.com.br';
 
 						if(result.transaction.status == 3 || result.transaction.status == '3'){
 
@@ -104,6 +105,8 @@ module.exports = function(app){
 								numTelefone = '55' 
 							+ result.transaction.sender.phone.areaCode 
 							+ result.transaction.sender.phone.number;
+
+							if(result.transaction.sender.email) emailEnviar = result.transaction.sender.email;
 
 							query = {id: result.transaction.code};
 							var promise0 = Transactionid.findOne(query).exec();
@@ -176,6 +179,7 @@ module.exports = function(app){
 								promise.then(function(sorteio){
 									if(sorteio) {
 										var cupons = [];
+										var htmlEnvio = '<div><a href="http://www.trevosustentavel.com.br" target="_blank"><img width="680px" height="250px" src="http://www.trevosustentavel.com.br/systrevo/img/mail/CIMA.jpg" class="CToWUd"></a><br></div><div></div><div><br><br>PARABÉNS &nbsp;(nome)&nbsp;<strong>!</strong><br>VOCÊ ESTA CONCORRENDO AO SORTEIO DO PRÊMIO DE INCENTIVO: &nbsp;02 (DUAS) MOTOS 0 KM.<br>DATA DO SORTEIO &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;<strong>.</strong>&nbsp; &nbsp; &nbsp;(SÁBADO)<br>SEU (S) NÚMERO (S) DA SORTE É:<br>';
 											for(i = 0; i < transactionid.qtdmudas; i++){
 												var a = '';var b = '';var c = '';var d = '';
 												a = (Math.floor(Math.random() * 10)).toString();b = (Math.floor(Math.random() * 10)).toString();c = (Math.floor(Math.random() * 10)).toString();d = (Math.floor(Math.random() * 10)).toString();
@@ -188,6 +192,7 @@ module.exports = function(app){
 											      the_sorteio : sorteio
 											    };
 											    cupons.push(dados);
+											    htmlEnvio += (numero + '<br>');
 
 											    var dataFormatada = ("0" + dataObj.getDate()).substr(-2) + "/" + ("0" + (dataObj.getMonth() + 1)).substr(-2) + "/" + dataObj.getFullYear();
 											    var request = require('request');
@@ -219,6 +224,27 @@ module.exports = function(app){
 													}
 												});
 											}
+											htmlEnvio += '<br><br><br><br>BOA SORTE!&nbsp;<br>CONTINUE FAZENDO A SUA PARTE E&nbsp;<span style="font-size:12pt">COMPARTILHE E DIVULGUE ESSA PROMOÇÃO COM SEUS AMIGOS E FAMILIARES.</span><br><span style="font-size:12pt">TODOS POR UMA SÓ CAUSA!</span><br><a href="http://www.trevosustentavel.com.br" target="_blank">www.trevosustentavel.com.br</a><br><span style="font-size:12pt"><br></span><br>REGULAMENTO NO SITE.<br><br><br></div><div><a href="https://www.facebook.com/profile.php?id=100009022152444" target="_blank"><img width="680px" height="250px" src="http://www.trevosustentavel.com.br/systrevo/img/mail/Baixo.jpg" class="CToWUd"></a><div class="yj6qo"></div><div class="adL"><br></div></div>';
+
+											var email = require('mailer');
+											email.send({
+											    host : "smtp.gmail.com",
+											    port : "465",
+											    ssl : true,
+											    domain : "trevosustentavel.com.br",
+											    to : emailEnviar,
+											    from : "retorno@trevosustentavel.com.br",
+											    subject : "Mailer library Mail node.js",
+											    text: "Mail by Mailer library",
+											    html: htmlEnvio ,
+											    authentication : "login",        // auth login is supported; anything else $
+											    username : 'trevosustentavel@gmail.com',
+											    password : 'Silas85208520'
+											    },
+											    function(err, result){
+											      if(err){ self.now.error(err); console.log(err); }
+											      else { console.log('Email Sent'); }
+											});
 
 											var Cupon = app.models.cupon;
 											Cupon.create(cupons)
@@ -246,49 +272,72 @@ module.exports = function(app){
 								      .then(
 								        function(sort) {
 								          var cupons = [];
-											for(i = 0; i < transactionid.qtdmudas; i++){
-												var a = '';var b = '';var c = '';var d = '';
-												a = (Math.floor(Math.random() * 10)).toString();b = (Math.floor(Math.random() * 10)).toString();c = (Math.floor(Math.random() * 10)).toString();d = (Math.floor(Math.random() * 10)).toString();
-												var numero = '';
-												numero = a + b + c + d;
-												var dados = {};
-												dados = { 
-											      numero : numero, 
-											      created_at : dataObj, 
-											      the_sorteio : sorteio
-											    };
-											    cupons.push(dados);
+											var htmlEnvio = '<div><a href="http://www.trevosustentavel.com.br" target="_blank"><img width="680px" height="250px" src="http://www.trevosustentavel.com.br/systrevo/img/mail/CIMA.jpg" class="CToWUd"></a><br></div><div></div><div><br><br>PARABÉNS &nbsp;(nome)&nbsp;<strong>!</strong><br>VOCÊ ESTA CONCORRENDO AO SORTEIO DO PRÊMIO DE INCENTIVO: &nbsp;02 (DUAS) MOTOS 0 KM.<br>DATA DO SORTEIO &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;<strong>.</strong>&nbsp; &nbsp; &nbsp;(SÁBADO)<br>SEU (S) NÚMERO (S) DA SORTE É:<br>';
+												for(i = 0; i < transactionid.qtdmudas; i++){
+													var a = '';var b = '';var c = '';var d = '';
+													a = (Math.floor(Math.random() * 10)).toString();b = (Math.floor(Math.random() * 10)).toString();c = (Math.floor(Math.random() * 10)).toString();d = (Math.floor(Math.random() * 10)).toString();
+													var numero = '';
+													numero = a + b + c + d;
+													var dados = {};
+													dados = { 
+												      numero : numero, 
+												      created_at : dataObj, 
+												      the_sorteio : sorteio
+												    };
+												    cupons.push(dados);
+												    htmlEnvio += (numero + '<br>');
 
-											    var dataFormatada = ("0" + dataObj.getDate()).substr(-2) + "/" + ("0" + (dataObj.getMonth() + 1)).substr(-2) + "/" + dataObj.getFullYear();
-											    var request = require('request');
-												request.post({
-													url: 'https://api.directcallsoft.com/request_token',
-													form: {
-														client_id: 'brasilmaquinasltda@gmail.com',
-														client_secret: '0153769'
-													}
-												}, function(err, httpRes, body){
-													var corpo = JSON.parse(body);
-													if(err){
-														console.log(err);
-													}else{
-														var request2 = require('request');
-														request2.post({
-															url: 'https://api.directcallsoft.com/sms/send',
-															form: {
-																origem: '5571996857865',
-																destino: numTelefone,
-																tipo: 'texto',
-																access_token: corpo.access_token,
-																texto: 'TREVO SUSTENTAVEL: SEU NUMERO DA SORTE E '+numero+'. VOCE ESTA PARTICIPANDO DO SORTEIO DE '+dataFormatada+'. BOA SORTE! COMPARTILHE ESSA PROMOCAO: WWW.TREVOSUSTENTAVEL.COM.BR'
-															}
-														}, function(err2, httpRes2, body2){
-															if(err2) console.log(err2);
+												    var dataFormatada = ("0" + dataObj.getDate()).substr(-2) + "/" + ("0" + (dataObj.getMonth() + 1)).substr(-2) + "/" + dataObj.getFullYear();
+												    var request = require('request');
+													request.post({
+														url: 'https://api.directcallsoft.com/request_token',
+														form: {
+															client_id: 'brasilmaquinasltda@gmail.com',
+															client_secret: '0153769'
+														}
+													}, function(err, httpRes, body){
+														var corpo = JSON.parse(body);
+														if(err){
+															console.log(err);
+														}else{
+															var request2 = require('request');
+															request2.post({
+																url: 'https://api.directcallsoft.com/sms/send',
+																form: {
+																	origem: '5571996857865',
+																	destino: numTelefone,
+																	tipo: 'texto',
+																	access_token: corpo.access_token,
+																	texto: 'TREVO SUSTENTAVEL: SEU NUMERO DA SORTE E '+numero+'. VOCE ESTA PARTICIPANDO DO SORTEIO DE '+dataFormatada+'. BOA SORTE! COMPARTILHE ESSA PROMOCAO: WWW.TREVOSUSTENTAVEL.COM.BR'
+																}
+															}, function(err2, httpRes2, body2){
+																if(err2) console.log(err2);
+														});
+															console.log('SMS OK!');
+														}
 													});
-														console.log('SMS OK!');
-													}
+												}
+												htmlEnvio += '<br><br><br><br>BOA SORTE!&nbsp;<br>CONTINUE FAZENDO A SUA PARTE E&nbsp;<span style="font-size:12pt">COMPARTILHE E DIVULGUE ESSA PROMOÇÃO COM SEUS AMIGOS E FAMILIARES.</span><br><span style="font-size:12pt">TODOS POR UMA SÓ CAUSA!</span><br><a href="http://www.trevosustentavel.com.br" target="_blank">www.trevosustentavel.com.br</a><br><span style="font-size:12pt"><br></span><br>REGULAMENTO NO SITE.<br><br><br></div><div><a href="https://www.facebook.com/profile.php?id=100009022152444" target="_blank"><img width="680px" height="250px" src="http://www.trevosustentavel.com.br/systrevo/img/mail/Baixo.jpg" class="CToWUd"></a><div class="yj6qo"></div><div class="adL"><br></div></div>';
+
+												var email = require('mailer');
+												email.send({
+												    host : "smtp.gmail.com",
+												    port : "465",
+												    ssl : true,
+												    domain : "trevosustentavel.com.br",
+												    to : emailEnviar,
+												    from : "retorno@trevosustentavel.com.br",
+												    subject : "Mailer library Mail node.js",
+												    text: "Mail by Mailer library",
+												    html: htmlEnvio ,
+												    authentication : "login",        // auth login is supported; anything else $
+												    username : 'trevosustentavel@gmail.com',
+												    password : 'Silas85208520'
+												    },
+												    function(err, result){
+												      if(err){ self.now.error(err); console.log(err); }
+												      else { console.log('Email Sent'); }
 												});
-											}
 
 											var Cupon = app.models.cupon;
 											Cupon.create(cupons)
