@@ -202,8 +202,9 @@ module.exports = function(app){
 											console.log('cupons.length');
 											console.log(cupons.length);
 
+											var dataFormatada = ("0" + dataObj.getDate()).substr(-2) + "/" + ("0" + (dataObj.getMonth() + 1)).substr(-2) + "/" + dataObj.getFullYear();
+
 											for(j = 0; j < cupons.length; j++){
-												var dataFormatada = ("0" + dataObj.getDate()).substr(-2) + "/" + ("0" + (dataObj.getMonth() + 1)).substr(-2) + "/" + dataObj.getFullYear();
 												var request = require('request');
 												request.post({
 													url: 'https://api.directcallsoft.com/request_token',
@@ -217,6 +218,8 @@ module.exports = function(app){
 													if(err){
 														console.log(err);
 													}else{
+														console.log('cupons[j]');
+														console.log(cupons[j]);
 														var request2 = require('request');
 														request2.post({
 															url: 'https://api.directcallsoft.com/sms/send',
@@ -230,7 +233,7 @@ module.exports = function(app){
 														}, function(err2, httpRes2, body2){
 															if(err2) console.log(err2);
 													});
-														console.log(cupons[i].numero);
+														console.log(cupons[j].numero);
 													}
 												});
 											}
@@ -283,8 +286,9 @@ module.exports = function(app){
 											console.log('cupons.length');
 											console.log(cupons.length);
 
+											var dataFormatada = ("0" + dataObj.getDate()).substr(-2) + "/" + ("0" + (dataObj.getMonth() + 1)).substr(-2) + "/" + dataObj.getFullYear();
+
 											for(j = 0; j < cupons.length; j++){
-												var dataFormatada = ("0" + dataObj.getDate()).substr(-2) + "/" + ("0" + (dataObj.getMonth() + 1)).substr(-2) + "/" + dataObj.getFullYear();
 												var request = require('request');
 												request.post({
 													url: 'https://api.directcallsoft.com/request_token',
@@ -298,6 +302,8 @@ module.exports = function(app){
 													if(err){
 														console.log(err);
 													}else{
+														console.log('cupons[j]');
+														console.log(cupons[j]);
 														var request2 = require('request');
 														request2.post({
 															url: 'https://api.directcallsoft.com/sms/send',
@@ -311,7 +317,7 @@ module.exports = function(app){
 														}, function(err2, httpRes2, body2){
 															if(err2) console.log(err2);
 													});
-														console.log(cupons[i].numero);
+														console.log(cupons[j].numero);
 													}
 												});
 											}
