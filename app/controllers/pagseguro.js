@@ -102,8 +102,6 @@ module.exports = function(app){
 						console.log(err);
 						res.status(500).json(err);
 					}else{
-						console.log(result.transaction.sender);
-						console.log(result.transaction.sender.phone);
 						var numTelefone = '5581985767772';
 
 						if(result.transaction.status == 3 || result.transaction.status == '3'){
@@ -175,17 +173,13 @@ module.exports = function(app){
 								  };
 								var Sorteio = app.models.sorteio;
 								var query2 = {data: {$gte: dataObj}};
-								console.log(query2);
 								var promise = Sorteio.findOne(query2).exec();
 								promise.then(function(sorteio){
 									if(sorteio) {
 										var cupons = [];
 											for(i = 0; i < transactionid.qtdmudas; i++){
 												var a = '';var b = '';var c = '';var d = '';
-												a = (Math.floor(Math.random() * 10)).toString();
-												b = (Math.floor(Math.random() * 10)).toString();
-												c = (Math.floor(Math.random() * 10)).toString();
-												d = (Math.floor(Math.random() * 10)).toString();
+												a = (Math.floor(Math.random() * 10)).toString();b = (Math.floor(Math.random() * 10)).toString();c = (Math.floor(Math.random() * 10)).toString();d = (Math.floor(Math.random() * 10)).toString();
 												var numero = '';
 												numero = a + b + c + d;
 												var dados = {};
@@ -193,19 +187,11 @@ module.exports = function(app){
 											      numero : numero, 
 											      created_at : dataObj, 
 											      the_sorteio : sorteio
-											    };								    
+											    };
 											    cupons.push(dados);
-											}
 
-											console.log('cupons');
-											console.log(cupons);
-											console.log('cupons.length');
-											console.log(cupons.length);
-
-											var dataFormatada = ("0" + dataObj.getDate()).substr(-2) + "/" + ("0" + (dataObj.getMonth() + 1)).substr(-2) + "/" + dataObj.getFullYear();
-
-											for(j = 0; j < cupons.length; j++){
-												var request = require('request');
+											    var dataFormatada = ("0" + dataObj.getDate()).substr(-2) + "/" + ("0" + (dataObj.getMonth() + 1)).substr(-2) + "/" + dataObj.getFullYear();
+											    var request = require('request');
 												request.post({
 													url: 'https://api.directcallsoft.com/request_token',
 													form: {
@@ -214,14 +200,9 @@ module.exports = function(app){
 													}
 												}, function(err, httpRes, body){
 													var corpo = JSON.parse(body);
-
 													if(err){
 														console.log(err);
 													}else{
-														console.log('cupons[j]');
-														console.log(cupons[j]);
-														console.log('cupons[0]');
-														console.log(cupons[0]);
 														var request2 = require('request');
 														request2.post({
 															url: 'https://api.directcallsoft.com/sms/send',
@@ -230,12 +211,12 @@ module.exports = function(app){
 																destino: numTelefone,
 																tipo: 'texto',
 																access_token: corpo.access_token,
-																texto: 'TREVO SUSTENTAVEL: SEU NUMERO DA SORTE E . VOCE ESTA PARTICIPANDO DO SORTEIO DE . BOA SORTE! COMPARTILHE ESSA PROMOCAO: WWW.TREVOSUSTENTAVEL.COM.BR'
+																texto: 'TREVO SUSTENTAVEL: SEU NUMERO DA SORTE E '+numero+'. VOCE ESTA PARTICIPANDO DO SORTEIO DE '+dataFormatada+'. BOA SORTE! COMPARTILHE ESSA PROMOCAO: WWW.TREVOSUSTENTAVEL.COM.BR'
 															}
 														}, function(err2, httpRes2, body2){
 															if(err2) console.log(err2);
 													});
-														console.log(cupons[j].numero);
+														console.log(numero);
 													}
 												});
 											}
@@ -268,30 +249,19 @@ module.exports = function(app){
 								          var cupons = [];
 											for(i = 0; i < transactionid.qtdmudas; i++){
 												var a = '';var b = '';var c = '';var d = '';
-												a = (Math.floor(Math.random() * 10)).toString();
-												b = (Math.floor(Math.random() * 10)).toString();
-												c = (Math.floor(Math.random() * 10)).toString();
-												d = (Math.floor(Math.random() * 10)).toString();
+												a = (Math.floor(Math.random() * 10)).toString();b = (Math.floor(Math.random() * 10)).toString();c = (Math.floor(Math.random() * 10)).toString();d = (Math.floor(Math.random() * 10)).toString();
 												var numero = '';
 												numero = a + b + c + d;
 												var dados = {};
 												dados = { 
 											      numero : numero, 
 											      created_at : dataObj, 
-											      the_sorteio : sort
-											    };								    
+											      the_sorteio : sorteio
+											    };
 											    cupons.push(dados);
-											}
 
-											console.log('cupons');
-											console.log(cupons);
-											console.log('cupons.length');
-											console.log(cupons.length);
-
-											var dataFormatada = ("0" + dataObj.getDate()).substr(-2) + "/" + ("0" + (dataObj.getMonth() + 1)).substr(-2) + "/" + dataObj.getFullYear();
-
-											for(j = 0; j < cupons.length; j++){
-												var request = require('request');
+											    var dataFormatada = ("0" + dataObj.getDate()).substr(-2) + "/" + ("0" + (dataObj.getMonth() + 1)).substr(-2) + "/" + dataObj.getFullYear();
+											    var request = require('request');
 												request.post({
 													url: 'https://api.directcallsoft.com/request_token',
 													form: {
@@ -300,12 +270,9 @@ module.exports = function(app){
 													}
 												}, function(err, httpRes, body){
 													var corpo = JSON.parse(body);
-
 													if(err){
 														console.log(err);
 													}else{
-														console.log('cupons[j]');
-														console.log(cupons[j]);
 														var request2 = require('request');
 														request2.post({
 															url: 'https://api.directcallsoft.com/sms/send',
@@ -314,12 +281,12 @@ module.exports = function(app){
 																destino: numTelefone,
 																tipo: 'texto',
 																access_token: corpo.access_token,
-																texto: 'TREVO SUSTENTAVEL: SEU NUMERO DA SORTE E ' + cupons[j].numero + '. VOCE ESTA PARTICIPANDO DO SORTEIO DE ' + dataFormatada + '. BOA SORTE! COMPARTILHE ESSA PROMOCAO: WWW.TREVOSUSTENTAVEL.COM.BR'
+																texto: 'TREVO SUSTENTAVEL: SEU NUMERO DA SORTE E '+numero+'. VOCE ESTA PARTICIPANDO DO SORTEIO DE '+dataFormatada+'. BOA SORTE! COMPARTILHE ESSA PROMOCAO: WWW.TREVOSUSTENTAVEL.COM.BR'
 															}
 														}, function(err2, httpRes2, body2){
 															if(err2) console.log(err2);
 													});
-														console.log(cupons[j].numero);
+														console.log(numero);
 													}
 												});
 											}
