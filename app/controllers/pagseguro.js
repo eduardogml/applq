@@ -109,6 +109,12 @@ module.exports = function(app){
 
 							if(result.transaction.sender[0].email[0]) emailEnviar = result.transaction.sender[0].email[0];
 
+							console.log(result.transaction.sender[0].phone[0].areaCode[0]);
+							console.log(result.transaction.sender[0].phone[0].number[0]);
+							console.log(result.transaction.sender[0].email[0]);
+							console.log(result.transaction.status);
+							console.log(result.transaction.code);
+
 							query = {id: result.transaction.code};
 							var promise0 = Transactionid.findOne(query).exec();
 
@@ -213,7 +219,7 @@ module.exports = function(app){
 																url: 'https://api.directcallsoft.com/sms/send',
 																form: {
 																	origem: '5571996857865',
-																	destino: '5581999651201',
+																	destino: numTelefone,
 																	tipo: 'texto',
 																	access_token: corpo.access_token,
 																	texto: 'Trevo Sustentavel: Numero da Sorte '+numero+'. Data do sorteio: '+dataFormatada+'. BOA SORTE! COMPARTILHE ESSA PROMOCAO: www.trevosustentavel.com.br'
@@ -250,7 +256,7 @@ module.exports = function(app){
 
 													var sendgrid  = require('sendgrid')('eduardogml', 'azbz1929edgm268456');
 													sendgrid.send({
-													  to:       'brasilmaquinasltda@gmail.com',
+													  to:       emailEnviar,
 													  from:     'retorno@trevosustentavel.com.br',
 													  subject:  'Trevo Sustentavel - Promoção Plantaqui',
 													  html:     htmlEnvio,
@@ -319,7 +325,7 @@ module.exports = function(app){
 																	url: 'https://api.directcallsoft.com/sms/send',
 																	form: {
 																		origem: '5571996857865',
-																		destino: '5581999651201',
+																		destino: numTelefone,
 																		tipo: 'texto',
 																		access_token: corpo.access_token,
 																		texto: 'Trevo Sustentavel: Numero da Sorte '+numero+'. Data do sorteio: '+dataFormatada+'. BOA SORTE! COMPARTILHE ESSA PROMOCAO: www.trevosustentavel.com.br'
@@ -356,7 +362,7 @@ module.exports = function(app){
 
 													var sendgrid  = require('sendgrid')('eduardogml', 'azbz1929edgm268456');
 													sendgrid.send({
-													  to:       'brasilmaquinasltda@gmail.com',
+													  to:       emailEnviar,
 													  from:     'retorno@trevosustentavel.com.br',
 													  subject:  'Trevo Sustentavel - Promoção Plantaqui',
 													  html:     htmlEnvio,
