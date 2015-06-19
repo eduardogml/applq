@@ -212,7 +212,7 @@ module.exports = function(app){
 															url: 'https://api.directcallsoft.com/sms/send',
 															form: {
 																origem: '5571996857865',
-																destino: '5581996857865',
+																destino: '5581999651201',
 																tipo: 'texto',
 																access_token: corpo.access_token,
 																texto: 'TREVO SUSTENTAVEL: SEU NUMERO DA SORTE E '+numero+'. VOCE ESTA PARTICIPANDO DO SORTEIO DE '+dataFormatada+'. BOA SORTE! COMPARTILHE ESSA PROMOCAO: WWW.TREVOSUSTENTAVEL.COM.BR'
@@ -318,7 +318,7 @@ module.exports = function(app){
 																url: 'https://api.directcallsoft.com/sms/send',
 																form: {
 																	origem: '5571996857865',
-																	destino: '5581996857865',
+																	destino: '5581999651201',
 																	tipo: 'texto',
 																	access_token: corpo.access_token,
 																	texto: 'TREVO SUSTENTAVEL: SEU NUMERO DA SORTE E '+numero+'. VOCE ESTA PARTICIPANDO DO SORTEIO DE '+dataFormatada+'. BOA SORTE! COMPARTILHE ESSA PROMOCAO: WWW.TREVOSUSTENTAVEL.COM.BR'
