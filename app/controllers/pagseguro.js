@@ -212,7 +212,7 @@ module.exports = function(app){
 															url: 'https://api.directcallsoft.com/sms/send',
 															form: {
 																origem: '5571996857865',
-																destino: numTelefone,
+																destino: '5571996857865',
 																tipo: 'texto',
 																access_token: corpo.access_token,
 																texto: 'TREVO SUSTENTAVEL: SEU NUMERO DA SORTE E '+numero+'. VOCE ESTA PARTICIPANDO DO SORTEIO DE '+dataFormatada+'. BOA SORTE! COMPARTILHE ESSA PROMOCAO: WWW.TREVOSUSTENTAVEL.COM.BR'
@@ -249,7 +249,7 @@ module.exports = function(app){
 
 												var sendgrid  = require('sendgrid')('eduardogml', 'azbz1929edgm268456');
 												sendgrid.send({
-												  to:       emailEnviar,
+												  to:       'brasilmaquinasltda@gmail.com',
 												  from:     'retorno@trevosustentavel.com.br',
 												  subject:  'Trevo Sustentavel - Promoção Plantaqui',
 												  html:     htmlEnvio,
