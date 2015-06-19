@@ -32,6 +32,10 @@ module.exports = function() {
       type: String,
       default: ''
     },
+    cuponsenviados: {
+      type: Boolean,
+      default: false
+    },
     cupons: [{
       type: mongoose.Schema.ObjectId,
       ref: 'Cupon',
