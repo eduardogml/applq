@@ -33,7 +33,8 @@
     "nodemailer-wellknown": "^0.1.5",
     "request": "^2.57.0",
     "sendgrid": "^1.8.0",
-    "xml2js": "^0.4.9"
+    "xml2js": "^0.4.9",
+    "xmldom": "^0.1.19"
   },
   "devDependencies": {
     "grunt": "^0.4.5",
