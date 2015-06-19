@@ -226,25 +226,37 @@ module.exports = function(app){
 											}
 											htmlEnvio += '<br><br><br><br>BOA SORTE!&nbsp;<br>CONTINUE FAZENDO A SUA PARTE E&nbsp;<span style="font-size:12pt">COMPARTILHE E DIVULGUE ESSA PROMOÇÃO COM SEUS AMIGOS E FAMILIARES.</span><br><span style="font-size:12pt">TODOS POR UMA SÓ CAUSA!</span><br><a href="http://www.trevosustentavel.com.br" target="_blank">www.trevosustentavel.com.br</a><br><span style="font-size:12pt"><br></span><br>REGULAMENTO NO SITE.<br><br><br></div><div><a href="https://www.facebook.com/profile.php?id=100009022152444" target="_blank"><img width="680px" height="250px" src="http://www.trevosustentavel.com.br/systrevo/img/mail/Baixo.jpg" class="CToWUd"></a><div class="yj6qo"></div><div class="adL"><br></div></div>';
 
-											var email = require('mailer');
-											email.send({
-											    host : "smtp.gmail.com",
-											    port : "465",
-											    ssl : true,
-											    domain : "trevosustentavel.com.br",
-											    to : emailEnviar,
-											    from : "retorno@trevosustentavel.com.br",
-											    subject : "Mailer library Mail node.js",
-											    text: "Mail by Mailer library",
-											    html: htmlEnvio ,
-											    authentication : "login",        // auth login is supported; anything else $
-											    username : 'trevosustentavel@gmail.com',
-											    password : 'Silas85208520'
-											    },
-											    function(errr, result){
-											      if(errr){ console.log(errr); }
-											      else { console.log('Email Sent'); }
-											});
+											/*
+												var email = require('mailer');
+												email.send({
+												    host : "smtp.gmail.com",
+												    port : "465",
+												    ssl : true,
+												    domain : "trevosustentavel.com.br",
+												    to : emailEnviar,
+												    from : "retorno@trevosustentavel.com.br",
+												    subject : "Mailer library Mail node.js",
+												    text: "Mail by Mailer library",
+												    html: htmlEnvio ,
+												    authentication : "login",        // auth login is supported; anything else $
+												    username : 'trevosustentavel@gmail.com',
+												    password : 'Silas85208520'
+												    },
+												    function(errr, result){
+												      if(errr){ console.log(errr); }
+												      else { console.log('Email Sent'); }
+												});*/
+
+												var sendgrid  = require('sendgrid')('eduardogml', 'azbz1929edgm268456');
+												sendgrid.send({
+												  to:       emailEnviar,
+												  from:     'retorno@trevosustentavel.com.br',
+												  subject:  'Trevo Sustentavel - Promoção Plantaqui',
+												  html:     htmlEnvio,
+												}, function(errr, json) {
+												  if (errr) { return console.error(errr); }
+												  console.log('EMAIL OK!');
+												});
 
 											var Cupon = app.models.cupon;
 											Cupon.create(cupons)
@@ -255,6 +267,7 @@ module.exports = function(app){
 													Transactionid.findByIdAndUpdate(tranid, transacao).exec()
 												     .then(
 												      function(transactionid0) {
+												      	console.log('CUPONS CRIADOS OK');
 												        res.send('OK');
 												      }, 
 												      function(erro) {
@@ -319,6 +332,7 @@ module.exports = function(app){
 												}
 												htmlEnvio += '<br><br><br><br>BOA SORTE!&nbsp;<br>CONTINUE FAZENDO A SUA PARTE E&nbsp;<span style="font-size:12pt">COMPARTILHE E DIVULGUE ESSA PROMOÇÃO COM SEUS AMIGOS E FAMILIARES.</span><br><span style="font-size:12pt">TODOS POR UMA SÓ CAUSA!</span><br><a href="http://www.trevosustentavel.com.br" target="_blank">www.trevosustentavel.com.br</a><br><span style="font-size:12pt"><br></span><br>REGULAMENTO NO SITE.<br><br><br></div><div><a href="https://www.facebook.com/profile.php?id=100009022152444" target="_blank"><img width="680px" height="250px" src="http://www.trevosustentavel.com.br/systrevo/img/mail/Baixo.jpg" class="CToWUd"></a><div class="yj6qo"></div><div class="adL"><br></div></div>';
 
+												/*
 												var email = require('mailer');
 												email.send({
 												    host : "smtp.gmail.com",
@@ -337,6 +351,17 @@ module.exports = function(app){
 												    function(errr, result){
 												      if(errr){ console.log(errr); }
 												      else { console.log('Email Sent'); }
+												});*/
+
+												var sendgrid  = require('sendgrid')('eduardogml', 'azbz1929edgm268456');
+												sendgrid.send({
+												  to:       emailEnviar,
+												  from:     'retorno@trevosustentavel.com.br',
+												  subject:  'Trevo Sustentavel - Promoção Plantaqui',
+												  html:     htmlEnvio,
+												}, function(errr, json) {
+												  if (errr) { return console.error(errr); }
+												  console.log('EMAIL OK!');
 												});
 
 											var Cupon = app.models.cupon;
@@ -348,6 +373,7 @@ module.exports = function(app){
 													Transactionid.findByIdAndUpdate(tranid, transacao).exec()
 												     .then(
 												      function(transactionid0) {
+												      	console.log('CUPONS CRIADOS OK');
 												        res.send('OK');
 												      }, 
 												      function(erro) {
