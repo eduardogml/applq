@@ -30,7 +30,7 @@ module.exports = function(app){
 		var objRetorno = {};
 
 		request({
-			url: 'https://ws.pagseguro.uol.com.br/v2/checkout?email=financeiro@trevosustentavel.com.br&token=B47D74B9CE624666BF4616D97A4205C6',
+			url: 'https://ws.pagseguro.uol.com.br/v2/checkout?email=financeiro@trevosustentavel.com.br&token=9A317C1843994462A16450C59A6B8C26',
 			method: 'POST',
 			headers: {
 				'Content-Type': 'application/xml; charset=UTF-8'
@@ -84,7 +84,7 @@ module.exports = function(app){
 		request({
 			url: 'https://ws.pagseguro.uol.com.br/v3/transactions/notifications/'
 			+ req.body.notificationCode
-			+ '?email=financeiro@trevosustentavel.com.br&token=B47D74B9CE624666BF4616D97A4205C6',
+			+ '?email=financeiro@trevosustentavel.com.br&token=9A317C1843994462A16450C59A6B8C26',
 			method: 'GET'
 		}, function(error, response, body){
 			if(error){
@@ -417,7 +417,7 @@ module.exports = function(app){
 	controller.consulta = function(req, res){
 		var request = require('request');
 		request({
-			url: 'https://ws.pagseguro.uol.com.br/v3/transactions/'+req.params.transId+'?email=financeiro@trevosustentavel.com.br&token=B47D74B9CE624666BF4616D97A4205C6',
+			url: 'https://ws.pagseguro.uol.com.br/v3/transactions/'+req.params.transId+'?email=financeiro@trevosustentavel.com.br&token=9A317C1843994462A16450C59A6B8C26',
 			method: 'GET'
 		}, function(error, response, body){
 			if(error){
