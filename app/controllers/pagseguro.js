@@ -100,7 +100,7 @@ module.exports = function(app){
 						var numTelefone = '5581985767772';
 						var emailEnviar = 'retorno@trevosustentavel.com.br';
 
-						if(result.transaction.status == 3 || result.transaction.status == '3'){
+						if(result.transaction.status[0] == 3 || result.transaction.status[0] == '3'){
 
 							if(result.transaction.sender[0].phone[0].areaCode[0] && result.transaction.sender[0].phone[0].number[0]) 
 								numTelefone = '55' 
@@ -112,8 +112,8 @@ module.exports = function(app){
 							console.log(result.transaction.sender[0].phone[0].areaCode[0]);
 							console.log(result.transaction.sender[0].phone[0].number[0]);
 							console.log(result.transaction.sender[0].email[0]);
-							console.log(result.transaction.status);
-							console.log(result.transaction.code);
+							console.log(result.transaction.status[0]);
+							console.log(result.transaction.code[0]);
 
 							query = {id: result.transaction.code};
 							var promise0 = Transactionid.findOne(query).exec();
@@ -430,6 +430,11 @@ module.exports = function(app){
 						console.log(err);
 						res.status(500).json(err);
 					}else{
+						console.log(result.transaction.sender[0].phone[0].areaCode[0]);
+						console.log(result.transaction.sender[0].phone[0].number[0]);
+						console.log(result.transaction.sender[0].email[0]);
+						console.log(result.transaction.status[0]);
+						console.log(result.transaction.code[0]);
 						res.send(result);
 					}
 				});// FIM parseString()
