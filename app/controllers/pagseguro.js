@@ -30,7 +30,7 @@ module.exports = function(app){
 		var objRetorno = {};
 
 		request({
-			url: 'https://ws.pagseguro.uol.com.br/v2/checkout?email=financeiro@trevosustentavel.com.br&token=2E98386D3CBE47E1A8AAE1CDB062BB14',
+			url: 'https://ws.sandbox.pagseguro.uol.com.br/v2/checkout?email=financeiro@trevosustentavel.com.br&token=86B372F41C414668893110868BB66799',
 			method: 'POST',
 			headers: {
 				'Content-Type': 'application/xml; charset=UTF-8'
@@ -81,9 +81,9 @@ module.exports = function(app){
 	controller.notificationCode = function(req, res){
 		var request = require('request');
 		request({
-			url: 'https://ws.pagseguro.uol.com.br/v3/transactions/notifications/'
+			url: 'https://ws.sandbox.pagseguro.uol.com.br/v3/transactions/notifications/'
 			+ req.body.notificationCode
-			+ '?email=financeiro@trevosustentavel.com.br&token=2E98386D3CBE47E1A8AAE1CDB062BB14',
+			+ '?email=financeiro@trevosustentavel.com.br&token=86B372F41C414668893110868BB66799',
 			method: 'GET'
 		}, function(error, response, body){
 			if(error){
@@ -318,7 +318,7 @@ module.exports = function(app){
 																url: 'https://api.directcallsoft.com/sms/send',
 																form: {
 																	origem: '5571996857865',
-																	destino: numTelefone,
+																	destino: '5581999651201',
 																	tipo: 'texto',
 																	access_token: corpo.access_token,
 																	texto: 'TREVO SUSTENTAVEL: SEU NUMERO DA SORTE E '+numero+'. VOCE ESTA PARTICIPANDO DO SORTEIO DE '+dataFormatada+'. BOA SORTE! COMPARTILHE ESSA PROMOCAO: WWW.TREVOSUSTENTAVEL.COM.BR'
@@ -355,7 +355,7 @@ module.exports = function(app){
 
 												var sendgrid  = require('sendgrid')('eduardogml', 'azbz1929edgm268456');
 												sendgrid.send({
-												  to:       emailEnviar,
+												  to:       'brasilmaquinasltda@gmail.com',
 												  from:     'retorno@trevosustentavel.com.br',
 												  subject:  'Trevo Sustentavel - Promoção Plantaqui',
 												  html:     htmlEnvio,
@@ -411,7 +411,7 @@ module.exports = function(app){
 	controller.consulta = function(req, res){
 		var request = require('request');
 		request({
-			url: 'https://ws.pagseguro.uol.com.br/v3/transactions/'+req.params.transId+'?email=financeiro@trevosustentavel.com.br&token=2E98386D3CBE47E1A8AAE1CDB062BB14',
+			url: 'https://ws.sandbox.pagseguro.uol.com.br/v3/transactions/'+req.params.transId+'?email=financeiro@trevosustentavel.com.br&token=86B372F41C414668893110868BB66799',
 			method: 'GET'
 		}, function(error, response, body){
 			if(error){
