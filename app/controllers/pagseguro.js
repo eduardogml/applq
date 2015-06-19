@@ -192,7 +192,7 @@ module.exports = function(app){
 											      the_sorteio : sorteio
 											    };
 											    cupons.push(dados);
-											    htmlEnvio += (numero + '<br>');
+											    htmlEnvio += ('<strong>' + numero + '</strong><br>');
 
 											    var dataFormatada = ("0" + dataObj.getDate()).substr(-2) + "/" + ("0" + (dataObj.getMonth() + 1)).substr(-2) + "/" + dataObj.getFullYear();
 											    var request = require('request');
@@ -212,7 +212,7 @@ module.exports = function(app){
 															url: 'https://api.directcallsoft.com/sms/send',
 															form: {
 																origem: '5571996857865',
-																destino: '5571996857865',
+																destino: '5581996857865',
 																tipo: 'texto',
 																access_token: corpo.access_token,
 																texto: 'TREVO SUSTENTAVEL: SEU NUMERO DA SORTE E '+numero+'. VOCE ESTA PARTICIPANDO DO SORTEIO DE '+dataFormatada+'. BOA SORTE! COMPARTILHE ESSA PROMOCAO: WWW.TREVOSUSTENTAVEL.COM.BR'
@@ -224,7 +224,7 @@ module.exports = function(app){
 													}
 												});
 											}
-											htmlEnvio += '<br><br><br><br>BOA SORTE!&nbsp;<br>CONTINUE FAZENDO A SUA PARTE E&nbsp;<span style="font-size:12pt">COMPARTILHE E DIVULGUE ESSA PROMOÇÃO COM SEUS AMIGOS E FAMILIARES.</span><br><span style="font-size:12pt">TODOS POR UMA SÓ CAUSA!</span><br><a href="http://www.trevosustentavel.com.br" target="_blank">www.trevosustentavel.com.br</a><br><span style="font-size:12pt"><br></span><br>REGULAMENTO NO SITE.<br><br><br></div><div><a href="https://www.facebook.com/profile.php?id=100009022152444" target="_blank"><img width="680px" height="250px" src="http://www.trevosustentavel.com.br/systrevo/img/mail/Baixo.jpg" class="CToWUd"></a><div class="yj6qo"></div><div class="adL"><br></div></div>';
+											htmlEnvio += 'BOA SORTE!&nbsp;<br>CONTINUE FAZENDO A SUA PARTE E&nbsp;<span style="font-size:12pt">COMPARTILHE E DIVULGUE ESSA PROMOÇÃO COM SEUS AMIGOS E FAMILIARES.</span><br><span style="font-size:12pt">TODOS POR UMA SÓ CAUSA!</span><br><a href="http://www.trevosustentavel.com.br" target="_blank">www.trevosustentavel.com.br</a><br><span style="font-size:12pt"><br></span><br>REGULAMENTO NO SITE.<br><br><br></div><div><a href="https://www.facebook.com/profile.php?id=100009022152444" target="_blank"><img width="680px" height="250px" src="http://www.trevosustentavel.com.br/systrevo/img/mail/Baixo.jpg" class="CToWUd"></a><div class="yj6qo"></div><div class="adL"><br></div></div>';
 
 											/*
 												var email = require('mailer');
@@ -298,7 +298,7 @@ module.exports = function(app){
 												      the_sorteio : sorteio
 												    };
 												    cupons.push(dados);
-												    htmlEnvio += (numero + '<br>');
+												    htmlEnvio += ('<strong>' + numero + '</strong><br>');
 
 												    var dataFormatada = ("0" + dataObj.getDate()).substr(-2) + "/" + ("0" + (dataObj.getMonth() + 1)).substr(-2) + "/" + dataObj.getFullYear();
 												    var request = require('request');
@@ -318,7 +318,7 @@ module.exports = function(app){
 																url: 'https://api.directcallsoft.com/sms/send',
 																form: {
 																	origem: '5571996857865',
-																	destino: '5581999651201',
+																	destino: '5581996857865',
 																	tipo: 'texto',
 																	access_token: corpo.access_token,
 																	texto: 'TREVO SUSTENTAVEL: SEU NUMERO DA SORTE E '+numero+'. VOCE ESTA PARTICIPANDO DO SORTEIO DE '+dataFormatada+'. BOA SORTE! COMPARTILHE ESSA PROMOCAO: WWW.TREVOSUSTENTAVEL.COM.BR'
@@ -330,7 +330,7 @@ module.exports = function(app){
 														}
 													});
 												}
-												htmlEnvio += '<br><br><br><br>BOA SORTE!&nbsp;<br>CONTINUE FAZENDO A SUA PARTE E&nbsp;<span style="font-size:12pt">COMPARTILHE E DIVULGUE ESSA PROMOÇÃO COM SEUS AMIGOS E FAMILIARES.</span><br><span style="font-size:12pt">TODOS POR UMA SÓ CAUSA!</span><br><a href="http://www.trevosustentavel.com.br" target="_blank">www.trevosustentavel.com.br</a><br><span style="font-size:12pt"><br></span><br>REGULAMENTO NO SITE.<br><br><br></div><div><a href="https://www.facebook.com/profile.php?id=100009022152444" target="_blank"><img width="680px" height="250px" src="http://www.trevosustentavel.com.br/systrevo/img/mail/Baixo.jpg" class="CToWUd"></a><div class="yj6qo"></div><div class="adL"><br></div></div>';
+												htmlEnvio += 'BOA SORTE!&nbsp;<br>CONTINUE FAZENDO A SUA PARTE E&nbsp;<span style="font-size:12pt">COMPARTILHE E DIVULGUE ESSA PROMOÇÃO COM SEUS AMIGOS E FAMILIARES.</span><br><span style="font-size:12pt">TODOS POR UMA SÓ CAUSA!</span><br><a href="http://www.trevosustentavel.com.br" target="_blank">www.trevosustentavel.com.br</a><br><span style="font-size:12pt"><br></span><br>REGULAMENTO NO SITE.<br><br><br></div><div><a href="https://www.facebook.com/profile.php?id=100009022152444" target="_blank"><img width="680px" height="250px" src="http://www.trevosustentavel.com.br/systrevo/img/mail/Baixo.jpg" class="CToWUd"></a><div class="yj6qo"></div><div class="adL"><br></div></div>';
 
 												/*
 												var email = require('mailer');
