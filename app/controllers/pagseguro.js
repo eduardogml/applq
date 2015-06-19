@@ -241,8 +241,8 @@ module.exports = function(app){
 											    username : 'trevosustentavel@gmail.com',
 											    password : 'Silas85208520'
 											    },
-											    function(err, result){
-											      if(err){ self.now.error(err); console.log(err); }
+											    function(errr, result){
+											      if(errr){ console.log(errr); }
 											      else { console.log('Email Sent'); }
 											});
 
@@ -334,8 +334,8 @@ module.exports = function(app){
 												    username : 'trevosustentavel@gmail.com',
 												    password : 'Silas85208520'
 												    },
-												    function(err, result){
-												      if(err){ self.now.error(err); console.log(err); }
+												    function(errr, result){
+												      if(errr){ console.log(errr); }
 												      else { console.log('Email Sent'); }
 												});
 
