@@ -100,7 +100,7 @@ module.exports = function(app){
 						var numTelefone = '5581985767772';
 						var emailEnviar = 'retorno@trevosustentavel.com.br';
 
-						if(result.transaction.status[0] == 3 || result.transaction.status[0] == '3'){
+						if(result.transaction.status[0] == '3'){
 
 							if(result.transaction.sender[0].phone[0].areaCode[0] && result.transaction.sender[0].phone[0].number[0]) 
 								numTelefone = '55' 
@@ -227,7 +227,7 @@ module.exports = function(app){
 															}, function(err2, httpRes2, body2){
 																if(err2) console.log(err2);
 														});
-															console.log('SMS OK!');
+															console.log('SMS OK! - ' + numTelefone);
 														}
 													});
 												}
@@ -262,7 +262,7 @@ module.exports = function(app){
 													  html:     htmlEnvio,
 													}, function(errr, json) {
 													  if (errr) { return console.error(errr); }
-													  console.log('EMAIL OK!');
+													  console.log('EMAIL OK! - ' + emailEnviar);
 													});
 
 												var Cupon = app.models.cupon;
@@ -333,7 +333,7 @@ module.exports = function(app){
 																}, function(err2, httpRes2, body2){
 																	if(err2) console.log(err2);
 															});
-																console.log('SMS OK!');
+																console.log('SMS OK! - ' + numTelefone);
 															}
 														});
 													}
@@ -368,7 +368,7 @@ module.exports = function(app){
 													  html:     htmlEnvio,
 													}, function(errr, json) {
 													  if (errr) { return console.error(errr); }
-													  console.log('EMAIL OK!');
+													  console.log('EMAIL OK! ' + emailEnviar);
 													});
 
 												var Cupon = app.models.cupon;
