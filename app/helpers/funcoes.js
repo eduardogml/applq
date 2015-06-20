@@ -124,12 +124,12 @@ exports.enviarSmsDirectCall = function(telefoneDestino, arrayNumeros, dataDoSort
 		client_secret: '0153769'
 	}}, function(erro, httpRes, body){
 		var corpo = JSON.parse(body);
-		if(erro) console.error(erro);
-		for(i = 0; i < arrayNumeros.length; i++){
+		if(erro){console.error(erro);}
 
+		for(i = 0; i < arrayNumeros.length; i++){
 			var numeroDaSorte = '';
 			numeroDaSorte = arrayNumeros[i];
-
+			
 			var request2 = require('request');
 			request2.post({
 				url: 'https://api.directcallsoft.com/sms/send',
@@ -141,11 +141,8 @@ exports.enviarSmsDirectCall = function(telefoneDestino, arrayNumeros, dataDoSort
 				texto: 'Trevo Sustentavel: Numero da Sorte '+numeroDaSorte+'. Data do sorteio: '+dataFormatada+'. BOA SORTE! COMPARTILHE ESSA PROMOCAO: www.trevosustentavel.com.br'
 			}
 			}, function(erro2, httpRes2, body2){
-				if(erro2){
-					console.error(erro2);
-				}else{
-					console.log('SMS OK! - ' + telefoneDestino + ' numeSorte - ' + numeroDaSorte);
-				}
+				if(erro2){console.error(erro2);}
+				console.log('SMS OK! - ' + telefoneDestino + ' numeSorte - ' + numeroDaSorte);
 			});
 		}
 	});

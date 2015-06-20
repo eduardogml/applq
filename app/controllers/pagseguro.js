@@ -133,7 +133,7 @@ module.exports = function(app){
 													Transactionid.findByIdAndUpdate(tranid, transacao).exec().then(
 														function(transactionid0) {
 															console.log('CUPONS CRIADOS OK');
-															funcoes.enviarEmailDireto('eduardogml.webmaster@gmail.com', emailParaEnvio);
+															//funcoes.enviarEmailDireto('eduardogml.webmaster@gmail.com', emailParaEnvio);
 															funcoes.enviarSmsDirectCall('5581985767772', numeros, dataSorteio);
 															res.send('OK');
 														},
