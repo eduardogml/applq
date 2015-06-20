@@ -89,7 +89,7 @@ exports.enviarEmailDireto = function(emailTo, htmlParaEnvio){
 		host : "smtp.gmail.com",
 		port : "465",
 		ssl : true,
-		domain : "trevosustentavel.com.br",
+		domain : "smtp.gmail.com",
 		to : emailTo,
 		from : "retorno@trevosustentavel.com.br",
 		subject : "Trevo Sustentavel - Promoção Plantaqui",
@@ -120,7 +120,7 @@ exports.enviarSmsDirectCall = function(telefoneDestino, arrayNumeros, dataDoSort
 	console.log('exports.enviarSmsDirectCalll');
 	console.log(arrayNumeros);
 
-	for(i = 0; i < arrayNumeros.length; i++){
+	for(var i = 0; i < arrayNumeros.length; i++){
 		var request = require('request');
 		request.post({
 				url: 'https://api.directcallsoft.com/request_token',
