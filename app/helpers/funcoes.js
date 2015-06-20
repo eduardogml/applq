@@ -129,10 +129,6 @@ exports.enviarSmsDirectCall = function(telefoneDestino, numero, dataDoSorteio){
 		if(erro){
 			console.error(erro);
 		}else{
-			console.log('NUMERO');
-			console.log(arrayNumeros[i]);
-			console.log(i);
-			console.log(arrayNumeros[0]);
 			var request2 = require('request');
 			request2.post({
 				url: 'https://api.directcallsoft.com/sms/send',

@@ -136,6 +136,7 @@ module.exports = function(app){
 															//funcoes.enviarEmailDireto('eduardogml.webmaster@gmail.com', emailParaEnvio);
 															console.log(numeros);
 															funcoes.enviarSmsDirectCall('5581985767772', numeros[0], dataSorteio);
+															sleep(10000);
 															res.send('OK');
 														},
 														function(erro) {
