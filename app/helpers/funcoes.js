@@ -120,7 +120,12 @@ exports.enviarSmsDirectCall = function(telefoneDestino, arrayNumeros, dataDoSort
 	console.log('exports.enviarSmsDirectCalll');
 	console.log(arrayNumeros);
 
-	for(var i = 0; i < arrayNumeros.length; i++){
+	for(var i = 0; i < 3; i++){
+		console.log(i);
+	}
+	var cont = 0;
+	var i = 0;
+	for(i = 0; i < arrayNumeros.length; i++){
 		var request = require('request');
 		request.post({
 				url: 'https://api.directcallsoft.com/request_token',
@@ -133,6 +138,10 @@ exports.enviarSmsDirectCall = function(telefoneDestino, arrayNumeros, dataDoSort
 				if(erro){
 				console.error(erro);
 			}else{
+
+				console.log('CONT');
+				console.log(cont);
+				console.log(arrayNumeros[cont]);
 
 				console.log('NUMERO');
 				console.log(arrayNumeros[i]);
