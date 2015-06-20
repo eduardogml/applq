@@ -1,5 +1,13 @@
 exports.proximoSorteio = function (){
-	var dataObj = new Date();
+	var moment = require('moment');
+	var dataObj = new Date(
+			moment().utcOffset('-03:00').year(),
+			moment().utcOffset('-03:00').month(),
+			moment().utcOffset('-03:00').date(),
+			moment().utcOffset('-03:00').hour(),
+			moment().utcOffset('-03:00').minute(),
+			moment().utcOffset('-03:00').second()
+		);
 	var hoje = dataObj.getDay();
 	var horaDoSorteio = 19;
 	var minDoSorteio = 00;
