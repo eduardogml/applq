@@ -144,6 +144,7 @@ exports.enviarSmsDirectCall = function(telefoneDestino, numero, dataDoSorteio){
 					console.error(erro2);
 					return false;
 				}else{
+					console.error('Numero da sorte ' + numero + ' enviado para ' + telefoneDestino);
 					return true;
 				}
 			});
