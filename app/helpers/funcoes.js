@@ -117,18 +117,8 @@ exports.enviarSmsDirectCall = function(telefoneDestino, arrayNumeros, dataDoSort
 	+ "/" 
 	+ dataDoSorteio.getFullYear();
 
-	var numeroEnviados = [];
-
-	for(i = 0; i < arrayNumeros.length; i++){
-
-		var numeroDaSorte = '';
-		numeroDaSorte = arrayNumeros[i];
-		numeroEnviados.push(numeroDaSorte);
-
-		console.log('NO FOR');
-		console.log(i);
-		console.log(numeroDaSorte);
-
+	var cont = 0;
+	while(cont < arrayNumeros.length){
 		var request = require('request');
 		request.post({
 				url: 'https://api.directcallsoft.com/request_token',
@@ -136,11 +126,17 @@ exports.enviarSmsDirectCall = function(telefoneDestino, arrayNumeros, dataDoSort
 				client_id: 'brasilmaquinasltda@gmail.com',
 				client_secret: '0153769'
 			}
-			}, function(erro, httpRes, body){
-				var corpo = JSON.parse(body);
-				if(erro){
+		}, function(erro, httpRes, body){
+			var corpo = JSON.parse(body);
+			if(erro){
 				console.error(erro);
 			}else{
+				var numeroDaSorte = '';
+				numeroDaSorte = arrayNumeros[cont];
+
+				console.log('NO FOR');
+				console.log(cont);
+				console.log(numeroDaSorte);
 				var request2 = require('request');
 				request2.post({
 					url: 'https://api.directcallsoft.com/sms/send',
@@ -155,6 +151,7 @@ exports.enviarSmsDirectCall = function(telefoneDestino, arrayNumeros, dataDoSort
 					if(erro2) console.error(erro2);
 				});
 				console.log('SMS OK! - ' + telefoneDestino);
+				cont += 1;
 			}
 		});
 	}
@@ -168,34 +165,6 @@ exports.gerarNumeros = function(qtd){
 		a = (Math.floor(Math.random() * 10)).toString();b = (Math.floor(Math.random() * 10)).toString();c = (Math.floor(Math.random() * 10)).toString();d = (Math.floor(Math.random() * 10)).toString();
 		var numero = a + b + c + d;
 		numerosGerados.push(numero);
-		var request = require('request');
-		request.post({
-			url: 'https://api.directcallsoft.com/request_token',
-			form: {
-			client_id: 'brasilmaquinasltda@gmail.com',
-			client_secret: '0153769'
-		}
-		}, function(err, httpRes, body){
-			var corpo = JSON.parse(body);
-			if(err){
-				console.log(err);
-			}else{
-				var request2 = require('request');
-				request2.post({
-					url: 'https://api.directcallsoft.com/sms/send',
-					form: {
-					origem: '5571996857865',
-					destino: numTelefone,
-					tipo: 'texto',
-					access_token: corpo.access_token,
-					texto: 'Trevo Sustentavel: Numero da Sorte '+numero+'. Data do sorteio: '+dataFormatada+'. BOA SORTE! COMPARTILHE ESSA PROMOCAO: www.trevosustentavel.com.br'
-				}
-				}, function(err2, httpRes2, body2){
-					if(err2) console.log(err2);
-				});
-					console.log('SMS OK! - ' + numTelefone);
-			}
-		});
 	}
 
 	return numerosGerados;
