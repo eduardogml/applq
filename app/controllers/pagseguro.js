@@ -135,9 +135,14 @@ module.exports = function(app){
 															console.log('CUPONS CRIADOS OK');
 															//funcoes.enviarEmailDireto('eduardogml.webmaster@gmail.com', emailParaEnvio);
 															console.log(numeros);
-															funcoes.enviarSmsDirectCall('5581985767772', numeros[0], dataSorteio);
-															sleep(10000);
-															res.send('OK');
+															var chamada = [];
+															for(var i = 0; i < numeros.length; i++){
+																chamada.push(funcoes.enviarSmsDirectCall);
+															}
+															for(var j = 0; j < chamada.length; j++){
+																var resultChamada = chamada[j]('5581985767772', numeros[i], dataSorteio);
+															}
+															setTimeout(res.send('OK'), 20000);
 														},
 														function(erro) {
 															console.error(erro);

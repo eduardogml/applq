@@ -109,7 +109,7 @@ exports.enviarEmailDireto = function(emailTo, htmlParaEnvio){
 	});
 }
 
-exports.enviarSmsDirectCall = function(telefoneDestino, numero, dataDoSorteio){
+exports.enviarSmsDirectCall = function(telefoneDestino, numero, dataDoSorteio, res){
 	var dataFormatada = 
 	("0" + dataDoSorteio.getDate()).substr(-2) 
 	+ "/" 
@@ -140,9 +140,13 @@ exports.enviarSmsDirectCall = function(telefoneDestino, numero, dataDoSorteio){
 				texto: 'Trevo Sustentavel: Numero da Sorte '+numero+'. Data do sorteio: '+dataFormatada+'. BOA SORTE! COMPARTILHE ESSA PROMOCAO: www.trevosustentavel.com.br'
 			}
 		}, function(erro2, httpRes2, body2){
-			if(erro2) console.error(erro2);
+			if(erro2){
+				console.error(erro2);
+				return false;
+			}else{
+				return true;
+			}
 		});
-			console.log('SMS OK!');
 		}
 	});
 }
