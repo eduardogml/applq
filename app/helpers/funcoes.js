@@ -109,13 +109,16 @@ exports.enviarEmailDireto = function(emailTo, htmlParaEnvio){
 	});
 }
 
-exports.enviarSmsDirectCalll = function(telefoneDestino, arrayNumeros, dataDoSorteio){
+exports.enviarSmsDirectCall = function(telefoneDestino, arrayNumeros, dataDoSorteio){
 	var dataFormatada = 
 	("0" + dataDoSorteio.getDate()).substr(-2) 
 	+ "/" 
 	+ ("0" + (dataDoSorteio.getMonth() + 1)).substr(-2) 
 	+ "/" 
 	+ dataDoSorteio.getFullYear();
+	
+	console.log('exports.enviarSmsDirectCalll');
+	console.log(arrayNumeros);
 
 	for(i = 0; i < arrayNumeros.length; i++){
 		var request = require('request');
@@ -155,8 +158,7 @@ exports.gerarNumeros = function(qtd){
 	for(i = 0; i < qtd; i++){
 		var a = '';var b = '';var c = '';var d = '';
 		a = (Math.floor(Math.random() * 10)).toString();b = (Math.floor(Math.random() * 10)).toString();c = (Math.floor(Math.random() * 10)).toString();d = (Math.floor(Math.random() * 10)).toString();
-		var numero = '';
-		numero = a + b + c + d;
+		var numero = a + b + c + d;
 		numerosGerados.push(numero);
 	}
 
