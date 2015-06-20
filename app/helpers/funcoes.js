@@ -156,13 +156,13 @@ exports.gerarNumeros = function(qtd){
 	return numerosGerados;
 }
 
-exports.gerarCupons = function(numeros, dataSorteio){
+exports.gerarCupons = function(numeros, sorteio){
 	cupons = [];
 	for(i = 0; i < numeros.length; i++){
 		dados = { 
 			numero : numeros[i],
 			created_at : Date.now(), 
-			the_sorteio : dataSorteio
+			the_sorteio : sorteio
 	    };
 	    cupons.push(dados);
 	}

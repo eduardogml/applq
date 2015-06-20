@@ -125,7 +125,7 @@ module.exports = function(app){
 											}else{
 												sorteio = created;
 											}
-											var cupons = funcoes.gerarCupons(numeros, dataSorteio);
+											var cupons = funcoes.gerarCupons(numeros, sorteio);
 											var Cupon = app.models.cupon;
 											Cupon.create(cupons).then(
 												function(cupon) {
