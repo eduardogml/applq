@@ -1,5 +1,6 @@
 module.exports = function(app){
 	app.get('/', function(req, res){
-		res.render('home');
+		var moment = require('moment');
+		res.end('home - ' + moment().format('DD/MM/YYYY Z'));
 	});
 };

@@ -1,5 +1,4 @@
 exports.proximoSorteio = function (){
-
 	var dataObj = new Date();
 	var hoje = dataObj.getDay();
 	var horaDoSorteio = 19;
