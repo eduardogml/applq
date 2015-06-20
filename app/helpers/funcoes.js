@@ -96,8 +96,8 @@ exports.enviarEmailDireto = function(emailTo, htmlParaEnvio){
 		text: "Trevo Sustentavel - Promoção Plantaqui",
 		html: htmlParaEnvio ,
 		authentication : "login",        // auth login is supported; anything else $
-		username : 'trevosustentavel@gmail.com',
-		password : 'Silas85208520'
+		username : 'eduardogml.webmaster@gmail.com',
+		password : 'azbz1929edgm268456'
 	},
 	function(erro, result){
 		if(erro){
@@ -133,10 +133,12 @@ exports.enviarSmsDirectCall = function(telefoneDestino, arrayNumeros, dataDoSort
 				if(erro){
 				console.error(erro);
 			}else{
+
 				console.log('NUMERO');
 				console.log(arrayNumeros[i]);
-				console.log('TEXTO');
-				console.log(arrayNumeros[i].toString());
+				console.log(i);
+				console.log(arrayNumeros[0]);
+
 				var request2 = require('request');
 				request2.post({
 					url: 'https://api.directcallsoft.com/sms/send',
@@ -145,7 +147,7 @@ exports.enviarSmsDirectCall = function(telefoneDestino, arrayNumeros, dataDoSort
 					destino: telefoneDestino,
 					tipo: 'texto',
 					access_token: corpo.access_token,
-					texto: 'Trevo Sustentavel: Numero da Sorte '+arrayNumeros[i].toString()+'. Data do sorteio: '+dataFormatada+'. BOA SORTE! COMPARTILHE ESSA PROMOCAO: www.trevosustentavel.com.br'
+					texto: 'Trevo Sustentavel: Numero da Sorte '+arrayNumeros[i]+'. Data do sorteio: '+dataFormatada+'. BOA SORTE! COMPARTILHE ESSA PROMOCAO: www.trevosustentavel.com.br'
 				}
 				}, function(erro2, httpRes2, body2){
 					if(erro2) console.error(erro2);
