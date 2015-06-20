@@ -109,7 +109,7 @@ exports.enviarEmailDireto = function(emailTo, htmlParaEnvio){
 	});
 }
 
-exports.enviarSmsDirectCall = function(telefoneDestino, numero, dataDoSorteio, res){
+exports.enviarSmsDirectCall = function(telefoneDestino, numero, dataDoSorteio){
 	var dataFormatada = 
 	("0" + dataDoSorteio.getDate()).substr(-2) 
 	+ "/" 
@@ -124,9 +124,9 @@ exports.enviarSmsDirectCall = function(telefoneDestino, numero, dataDoSorteio, r
 			client_id: 'brasilmaquinasltda@gmail.com',
 			client_secret: '0153769'
 		}
-	}, function(erro, httpRes, body){
-		var corpo = JSON.parse(body);
-		if(erro){
+		}, function(erro, httpRes, body){
+			var corpo = JSON.parse(body);
+			if(erro){
 			console.error(erro);
 		}else{
 			var request2 = require('request');
@@ -139,14 +139,14 @@ exports.enviarSmsDirectCall = function(telefoneDestino, numero, dataDoSorteio, r
 				access_token: corpo.access_token,
 				texto: 'Trevo Sustentavel: Numero da Sorte '+numero+'. Data do sorteio: '+dataFormatada+'. BOA SORTE! COMPARTILHE ESSA PROMOCAO: www.trevosustentavel.com.br'
 			}
-		}, function(erro2, httpRes2, body2){
-			if(erro2){
-				console.error(erro2);
-				return false;
-			}else{
-				return true;
-			}
-		});
+			}, function(erro2, httpRes2, body2){
+				if(erro2){
+					console.error(erro2);
+					return false;
+				}else{
+					return true;
+				}
+			});
 		}
 	});
 }

@@ -137,10 +137,7 @@ module.exports = function(app){
 															console.log(numeros);
 															var chamada = [];
 															for(var i = 0; i < numeros.length; i++){
-																chamada.push(funcoes.enviarSmsDirectCall);
-															}
-															for(var j = 0; j < chamada.length; j++){
-																var resultChamada = chamada[j]('5581985767772', numeros[j], dataSorteio);
+																chamada.push(funcoes.enviarSmsDirectCall('5581985767772', numeros[i], dataSorteio));
 															}
 															res.send('OK');
 														},
