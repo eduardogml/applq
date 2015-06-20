@@ -117,44 +117,38 @@ exports.enviarSmsDirectCall = function(telefoneDestino, arrayNumeros, dataDoSort
 	+ "/" 
 	+ dataDoSorteio.getFullYear();
 
-	for(i = 0; i < arrayNumeros.length; i++){
+	request.post({
+		url: 'https://api.directcallsoft.com/request_token',
+		form: {
+		client_id: 'brasilmaquinasltda@gmail.com',
+		client_secret: '0153769'
+	}}, function(erro, httpRes, body){
+		var corpo = JSON.parse(body);
+		if(erro) console.error(erro);
+		for(i = 0; i < arrayNumeros.length; i++){
 
-		var numeroDaSorte = '';
-		numeroDaSorte = arrayNumeros[i];
+			var numeroDaSorte = '';
+			numeroDaSorte = arrayNumeros[i];
 
-		console.log('NO FOR');
-		console.log(i);
-		console.log(numeroDaSorte);
-
-		var request = require('request');
-		request.post({
-				url: 'https://api.directcallsoft.com/request_token',
+			var request2 = require('request');
+			request2.post({
+				url: 'https://api.directcallsoft.com/sms/send',
 				form: {
-				client_id: 'brasilmaquinasltda@gmail.com',
-				client_secret: '0153769'
+				origem: '5571996857865',
+				destino: telefoneDestino,
+				tipo: 'texto',
+				access_token: corpo.access_token,
+				texto: 'Trevo Sustentavel: Numero da Sorte '+numeroDaSorte+'. Data do sorteio: '+dataFormatada+'. BOA SORTE! COMPARTILHE ESSA PROMOCAO: www.trevosustentavel.com.br'
 			}
-			}, function(erro, httpRes, body){
-				var corpo = JSON.parse(body);
-				if(erro){
-				console.error(erro);
-			}else{
-				var request2 = require('request');
-				request2.post({
-					url: 'https://api.directcallsoft.com/sms/send',
-					form: {
-					origem: '5571996857865',
-					destino: telefoneDestino,
-					tipo: 'texto',
-					access_token: corpo.access_token,
-					texto: 'Trevo Sustentavel: Numero da Sorte '+numeroDaSorte+'. Data do sorteio: '+dataFormatada+'. BOA SORTE! COMPARTILHE ESSA PROMOCAO: www.trevosustentavel.com.br'
+			}, function(erro2, httpRes2, body2){
+				if(erro2){
+					console.error(erro2);
+				}else{
+					console.log('SMS OK! - ' + telefoneDestino + ' numeSorte - ' + numeroDaSorte);
 				}
-				}, function(erro2, httpRes2, body2){
-					if(erro2) console.error(erro2);
-				});
-				console.log('SMS OK! - ' + telefoneDestino);
-			}
-		});
-	}
+			});
+		}
+	});
 }
 
 exports.gerarNumeros = function(qtd){
