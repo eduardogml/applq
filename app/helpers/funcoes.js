@@ -72,7 +72,7 @@ exports.enviarEmailSendgrid = function(emailTo, htmlParaEnvio){
 		if (erro){
 			return console.error(erro);
 		}
-		console.log('EMAIL OK! - ' + emailEnviar);
+		console.log('EMAIL OK! - ' + emailTo);
 	});
 }
 
@@ -85,8 +85,8 @@ exports.enviarEmailDireto = function(emailTo, htmlParaEnvio){
 		domain : "trevosustentavel.com.br",
 		to : emailTo,
 		from : "retorno@trevosustentavel.com.br",
-		subject : "Mailer library Mail node.js",
-		text: "Mail by Mailer library",
+		subject : "Trevo Sustentavel - Promoção Plantaqui",
+		text: "Trevo Sustentavel - Promoção Plantaqui",
 		html: htmlParaEnvio ,
 		authentication : "login",        // auth login is supported; anything else $
 		username : 'trevosustentavel@gmail.com',
