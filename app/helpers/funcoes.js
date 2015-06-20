@@ -52,7 +52,7 @@ exports.proximoSorteio = function (){
 			break;
 		case 6:
 			if(dataObj.getHours < 16){
-				dataObj.setDate(dataObj.getDate() + 0);
+				dataObj.setDate(dataObj.getDate());
 				dataObj.setHours(horaDoSorteio);
 				dataObj.setMinutes(minDoSorteio);
 				dataObj.setSeconds(segDoSorteio);
@@ -116,7 +116,7 @@ exports.enviarSmsDirectCall = function(telefoneDestino, arrayNumeros, dataDoSort
 	+ ("0" + (dataDoSorteio.getMonth() + 1)).substr(-2) 
 	+ "/" 
 	+ dataDoSorteio.getFullYear();
-	
+
 	console.log('exports.enviarSmsDirectCalll');
 	console.log(arrayNumeros);
 
@@ -133,6 +133,10 @@ exports.enviarSmsDirectCall = function(telefoneDestino, arrayNumeros, dataDoSort
 				if(erro){
 				console.error(erro);
 			}else{
+				console.log('NUMERO');
+				console.log(arrayNumeros[i]);
+				console.log('TEXTO');
+				console.log(arrayNumeros[i].toString());
 				var request2 = require('request');
 				request2.post({
 					url: 'https://api.directcallsoft.com/sms/send',
@@ -141,7 +145,7 @@ exports.enviarSmsDirectCall = function(telefoneDestino, arrayNumeros, dataDoSort
 					destino: telefoneDestino,
 					tipo: 'texto',
 					access_token: corpo.access_token,
-					texto: 'Trevo Sustentavel: Numero da Sorte '+arrayNumeros[i]+'. Data do sorteio: '+dataFormatada+'. BOA SORTE! COMPARTILHE ESSA PROMOCAO: www.trevosustentavel.com.br'
+					texto: 'Trevo Sustentavel: Numero da Sorte '+arrayNumeros[i].toString()+'. Data do sorteio: '+dataFormatada+'. BOA SORTE! COMPARTILHE ESSA PROMOCAO: www.trevosustentavel.com.br'
 				}
 				}, function(erro2, httpRes2, body2){
 					if(erro2) console.error(erro2);
