@@ -109,7 +109,7 @@ exports.enviarEmailDireto = function(emailTo, htmlParaEnvio){
 	});
 }
 
-exports.enviarSmsDirectCall = function(telefoneDestino, arrayNumeros, dataDoSorteio){
+exports.enviarSmsDirectCall = function(telefoneDestino, numero, dataDoSorteio){
 	var dataFormatada = 
 	("0" + dataDoSorteio.getDate()).substr(-2) 
 	+ "/" 
@@ -117,44 +117,38 @@ exports.enviarSmsDirectCall = function(telefoneDestino, arrayNumeros, dataDoSort
 	+ "/" 
 	+ dataDoSorteio.getFullYear();
 
-	var cont = 0;
-	while(cont < arrayNumeros.length){
-		var request = require('request');
-		request.post({
-				url: 'https://api.directcallsoft.com/request_token',
+	var request = require('request');
+	request.post({
+			url: 'https://api.directcallsoft.com/request_token',
+			form: {
+			client_id: 'brasilmaquinasltda@gmail.com',
+			client_secret: '0153769'
+		}
+	}, function(erro, httpRes, body){
+		var corpo = JSON.parse(body);
+		if(erro){
+			console.error(erro);
+		}else{
+			console.log('NUMERO');
+			console.log(arrayNumeros[i]);
+			console.log(i);
+			console.log(arrayNumeros[0]);
+			var request2 = require('request');
+			request2.post({
+				url: 'https://api.directcallsoft.com/sms/send',
 				form: {
-				client_id: 'brasilmaquinasltda@gmail.com',
-				client_secret: '0153769'
+				origem: '5571996857865',
+				destino: telefoneDestino,
+				tipo: 'texto',
+				access_token: corpo.access_token,
+				texto: 'Trevo Sustentavel: Numero da Sorte '+numero+'. Data do sorteio: '+dataFormatada+'. BOA SORTE! COMPARTILHE ESSA PROMOCAO: www.trevosustentavel.com.br'
 			}
-		}, function(erro, httpRes, body){
-			var corpo = JSON.parse(body);
-			if(erro){
-				console.error(erro);
-			}else{
-				var numeroDaSorte = '';
-				numeroDaSorte = arrayNumeros[cont];
-
-				console.log('NO FOR');
-				console.log(cont);
-				console.log(numeroDaSorte);
-				var request2 = require('request');
-				request2.post({
-					url: 'https://api.directcallsoft.com/sms/send',
-					form: {
-					origem: '5571996857865',
-					destino: telefoneDestino,
-					tipo: 'texto',
-					access_token: corpo.access_token,
-					texto: 'Trevo Sustentavel: Numero da Sorte '+numeroDaSorte+'. Data do sorteio: '+dataFormatada+'. BOA SORTE! COMPARTILHE ESSA PROMOCAO: www.trevosustentavel.com.br'
-				}
-				}, function(erro2, httpRes2, body2){
-					if(erro2) console.error(erro2);
-				});
-				console.log('SMS OK! - ' + telefoneDestino);
-				cont += 1;
-			}
+		}, function(erro2, httpRes2, body2){
+			if(erro2) console.error(erro2);
 		});
-	}
+			console.log('SMS OK!');
+		}
+	});
 }
 
 exports.gerarNumeros = function(qtd){

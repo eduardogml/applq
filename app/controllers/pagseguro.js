@@ -134,7 +134,11 @@ module.exports = function(app){
 														function(transactionid0) {
 															console.log('CUPONS CRIADOS OK');
 															//funcoes.enviarEmailDireto('eduardogml.webmaster@gmail.com', emailParaEnvio);
-															funcoes.enviarSmsDirectCall('5581985767772', numeros, dataSorteio);
+															console.log(numeros);
+															for(var i = 0; i < numeros; i++){
+																console.log(numeros[i]);
+																funcoes.enviarSmsDirectCall('5581985767772', numeros[i], dataSorteio);
+															}
 															res.send('OK');
 														},
 														function(erro) {
