@@ -51,7 +51,7 @@ exports.proximoSorteio = function (){
 			dataObj.setSeconds(segDoSorteio);
 			break;
 		case 6:
-			if(dataObj.getHours < 16){
+			if(dataObj.getHours() < 16){
 				dataObj.setDate(dataObj.getDate());
 				dataObj.setHours(horaDoSorteio);
 				dataObj.setMinutes(minDoSorteio);
