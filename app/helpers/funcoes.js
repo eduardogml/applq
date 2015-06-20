@@ -117,15 +117,15 @@ exports.enviarSmsDirectCall = function(telefoneDestino, arrayNumeros, dataDoSort
 	+ "/" 
 	+ dataDoSorteio.getFullYear();
 
-	console.log('exports.enviarSmsDirectCalll');
-	console.log(arrayNumeros);
-
-	for(var i = 0; i < 3; i++){
-		console.log(i);
-	}
-	var cont = 0;
-	var i = 0;
 	for(i = 0; i < arrayNumeros.length; i++){
+
+		var numeroDaSorte = '';
+		numeroDaSorte = arrayNumeros[i];
+
+		console.log('NO FOR');
+		console.log(i);
+		console.log(numeroDaSorte);
+
 		var request = require('request');
 		request.post({
 				url: 'https://api.directcallsoft.com/request_token',
@@ -138,16 +138,6 @@ exports.enviarSmsDirectCall = function(telefoneDestino, arrayNumeros, dataDoSort
 				if(erro){
 				console.error(erro);
 			}else{
-
-				console.log('CONT');
-				console.log(cont);
-				console.log(arrayNumeros[cont]);
-
-				console.log('NUMERO');
-				console.log(arrayNumeros[i]);
-				console.log(i);
-				console.log(arrayNumeros[0]);
-
 				var request2 = require('request');
 				request2.post({
 					url: 'https://api.directcallsoft.com/sms/send',
@@ -156,7 +146,7 @@ exports.enviarSmsDirectCall = function(telefoneDestino, arrayNumeros, dataDoSort
 					destino: telefoneDestino,
 					tipo: 'texto',
 					access_token: corpo.access_token,
-					texto: 'Trevo Sustentavel: Numero da Sorte '+arrayNumeros[i]+'. Data do sorteio: '+dataFormatada+'. BOA SORTE! COMPARTILHE ESSA PROMOCAO: www.trevosustentavel.com.br'
+					texto: 'Trevo Sustentavel: Numero da Sorte '+numeroDaSorte+'. Data do sorteio: '+dataFormatada+'. BOA SORTE! COMPARTILHE ESSA PROMOCAO: www.trevosustentavel.com.br'
 				}
 				}, function(erro2, httpRes2, body2){
 					if(erro2) console.error(erro2);

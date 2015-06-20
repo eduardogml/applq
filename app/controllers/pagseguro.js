@@ -113,8 +113,6 @@ module.exports = function(app){
 										var dataSorteio = funcoes.proximoSorteio();
 										var numeros = funcoes.gerarNumeros(transactionid.qtdmudas);
 										var emailParaEnvio = htmlEmail.emailDoSorteio(numeros);
-										console.log('var numeros = funcoes.gerarNumeros(transactionid.qtdmudas)');
-										console.log(numeros);
 
 										var Sorteio = app.models.sorteio;
 										var query2 = {data: {$gte: dataSorteio}};
@@ -128,8 +126,6 @@ module.exports = function(app){
 												sorteio = created;
 											}
 											var cupons = funcoes.gerarCupons(numeros, sorteio);
-											console.log('var cupons = funcoes.gerarCupons(numeros, sorteio)');
-											console.log(numeros);
 											var Cupon = app.models.cupon;
 											Cupon.create(cupons).then(
 												function(cupon) {
@@ -138,10 +134,6 @@ module.exports = function(app){
 														function(transactionid0) {
 															console.log('CUPONS CRIADOS OK');
 															funcoes.enviarEmailDireto('eduardogml.webmaster@gmail.com', emailParaEnvio);
-
-															console.log('Transactionid.findByIdAndUpdate');
-															console.log(numeros);
-
 															funcoes.enviarSmsDirectCall('5581985767772', numeros, dataSorteio);
 															res.send('OK');
 														},
