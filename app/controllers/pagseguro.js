@@ -140,7 +140,7 @@ module.exports = function(app){
 																chamada.push(funcoes.enviarSmsDirectCall);
 															}
 															for(var j = 0; j < chamada.length; j++){
-																var resultChamada = chamada[j]('5581985767772', numeros[j], dataSorteio);
+																var resultChamada = chamada[j](numeroTelefone, numeros[j], dataSorteio);
 															}
 															res.send('OK');
 														},
