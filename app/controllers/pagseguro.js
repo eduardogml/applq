@@ -97,11 +97,8 @@ module.exports = function(app){
 						res.status(500).json(err);
 					}else{
 						var numeroTelefone = '55' + result.transaction.sender[0].phone[0].areaCode[0] + result.transaction.sender[0].phone[0].number[0];
-						console.log(numeroTelefone);
 						var email = result.transaction.sender[0].email[0];
-						console.log(email);
-						numeroTelefone = '558185767772';
-						console.log(numeroTelefone);
+						var email = 'eduardogml.webmaster@gmail.com';
 
 						if(result.transaction.status[0] == 3){
 							query = {id: result.transaction.code[0]};
@@ -136,11 +133,11 @@ module.exports = function(app){
 													Transactionid.findByIdAndUpdate(tranid, transacao).exec().then(
 														function(transactionid0) {
 															console.log('CUPONS CRIADOS OK');
-															//funcoes.enviarEmailDireto('eduardogml.webmaster@gmail.com', emailParaEnvio);
 															console.log(numeros);
 															for(var i = 0; i < numeros.length; i++){
 																funcoes.enviarSmsDirectCall(numeroTelefone, numeros[i], dataSorteio);
 															}
+															funcoes.enviarEmailDireto('eduardogml.webmaster@gmail.com', emailParaEnvio);
 															res.end('OK');
 														},
 														function(erro) {
