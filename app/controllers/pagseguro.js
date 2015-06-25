@@ -98,7 +98,6 @@ module.exports = function(app){
 					}else{
 						var numeroTelefone = '55' + result.transaction.sender[0].phone[0].areaCode[0] + result.transaction.sender[0].phone[0].number[0];
 						var email = result.transaction.sender[0].email[0];
-						var email = 'eduardogml.webmaster@gmail.com';
 
 						if(result.transaction.status[0] == 3){
 							query = {id: result.transaction.code[0]};
@@ -137,7 +136,7 @@ module.exports = function(app){
 															for(var i = 0; i < numeros.length; i++){
 																funcoes.enviarSmsDirectCall(numeroTelefone, numeros[i], dataSorteio);
 															}
-															funcoes.enviarEmailDireto('eduardogml.webmaster@gmail.com', emailParaEnvio);
+															funcoes.enviarEmailDireto(email, emailParaEnvio);
 															res.end('OK');
 														},
 														function(erro) {
