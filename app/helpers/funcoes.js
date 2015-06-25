@@ -110,8 +110,7 @@ exports.enviarEmailDireto = function(emailTo, htmlParaEnvio){
 }
 
 exports.enviarSmsDirectCall = function(telefoneDestino, numero, dataDoSorteio){
-	var dataFormatada = 
-	("0" + dataDoSorteio.getDate()).substr(-2) 
+	var dataFormatada =  ("0" + dataDoSorteio.getDate()).substr(-2) 
 	+ "/" 
 	+ ("0" + (dataDoSorteio.getMonth() + 1)).substr(-2) 
 	+ "/" 
@@ -121,35 +120,37 @@ exports.enviarSmsDirectCall = function(telefoneDestino, numero, dataDoSorteio){
 	request.post({
 			url: 'https://api.directcallsoft.com/request_token',
 			form: {
-			client_id: 'brasilmaquinasltda@gmail.com',
-			client_secret: '0153769'
-		}
-		}, function(erro, httpRes, body){
+				client_id: 'brasilmaquinasltda@gmail.com',
+				client_secret: '0153769'
+			}
+		}, 
+		function(erro, httpRes, body){
 			var corpo = JSON.parse(body);
 			if(erro){
 			console.error(erro);
-		}else{
-			var request2 = require('request');
-			request2.post({
-				url: 'https://api.directcallsoft.com/sms/send',
-				form: {
-				origem: '5571996857865',
-				destino: telefoneDestino,
-				tipo: 'texto',
-				access_token: corpo.access_token,
-				texto: 'Trevo Sustentavel: Numero da Sorte '+numero+'. Data do sorteio: '+dataFormatada+'. BOA SORTE! COMPARTILHE ESSA PROMOCAO: www.trevosustentavel.com.br'
+			}else{
+				var request2 = require('request');
+				request2.post({
+					url: 'https://api.directcallsoft.com/sms/send',
+					form: {
+						origem: '5571996857865',
+						destino: telefoneDestino,
+						tipo: 'texto',
+						access_token: corpo.access_token,
+						texto: 'Trevo Sustentavel: Numero da Sorte '+numero+'. Data do sorteio: '+dataFormatada+'. BOA SORTE! COMPARTILHE ESSA PROMOCAO: www.trevosustentavel.com.br'
+					}
+				}, 
+				function(erro2, httpRes2, body2){
+					if(erro2){
+						console.error(erro2);
+						return false;
+					}else{
+						console.error('Numero da sorte ' + numero + ' enviado para ' + telefoneDestino);
+						return true;
+					}
+				});
 			}
-			}, function(erro2, httpRes2, body2){
-				if(erro2){
-					console.error(erro2);
-					return false;
-				}else{
-					console.error('Numero da sorte ' + numero + ' enviado para ' + telefoneDestino);
-					return true;
-				}
-			});
-		}
-	});
+		});
 }
 
 exports.gerarNumeros = function(qtd){

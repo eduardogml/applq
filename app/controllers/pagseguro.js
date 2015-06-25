@@ -96,11 +96,14 @@ module.exports = function(app){
 						console.log(err);
 						res.status(500).json(err);
 					}else{
+						var numeroTelefone = '55' + result.transaction.sender[0].phone[0].areaCode[0] + result.transaction.sender[0].phone[0].number[0];
+						console.log(numeroTelefone);
+						var email = result.transaction.sender[0].email[0];
+						console.log(email);
+						numeroTelefone = '558185767772';
+						console.log(numeroTelefone);
+
 						if(result.transaction.status[0] == 3){
-
-							var numeroTelefone = '55' + result.transaction.sender[0].phone[0].areaCode[0] + result.transaction.sender[0].phone[0].number[0];
-							var email = result.transaction.sender[0].email[0];
-
 							query = {id: result.transaction.code[0]};
 
 							Transactionid.findOne(query).exec().then(
@@ -135,14 +138,10 @@ module.exports = function(app){
 															console.log('CUPONS CRIADOS OK');
 															//funcoes.enviarEmailDireto('eduardogml.webmaster@gmail.com', emailParaEnvio);
 															console.log(numeros);
-															var chamada = [];
 															for(var i = 0; i < numeros.length; i++){
-																chamada.push(funcoes.enviarSmsDirectCall);
+																funcoes.enviarSmsDirectCall(numeroTelefone, numeros[i], dataSorteio);
 															}
-															for(var j = 0; j < chamada.length; j++){
-																var resultChamada = chamada[j](numeroTelefone, numeros[j], dataSorteio);
-															}
-															res.send('OK');
+															res.end('OK');
 														},
 														function(erro) {
 															console.error(erro);
