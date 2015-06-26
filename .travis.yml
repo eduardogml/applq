@@ -1,40 +1,40 @@
 language: node_js
 notifications:
-  - eduardogomesdemouralima@hotmail.com
+- eduardogomesdemouralima@hotmail.com
 node_js:
-  - 0.1
+- 0.1
 services:
-  - mongodb
+- mongodb
 env:
   global:
   - NODE_ENV: test
 addons:
   sauce_connect: true
 before_install:
-  - npm install -g bower@1.3
-  - npm install -g grunt-cli@0.1
-  - npm install -g karma-cli@0.0
-  - npm install -g protractor@1.5
-  - webdriver-manager update
-  - bower install
+- npm install -g bower@1.3
+- npm install -g grunt-cli@0.1
+- npm install -g karma-cli@0.0
+- npm install -g protractor@1.5
+- webdriver-manager update
+- bower install
 before_script:
-  - node test/data.js
-  - grunt minifica
+- node test/data.js
+- grunt minifica
 script:
-  - karma start config/karma.config.js --single-run --browsers PhantomJS
-  - node server &
-  - protractor config/protractor.js
+- karma start config/karma.config.js --single-run --browsers PhantomJS
+- node server &
+- protractor config/protractor.js
 before_deploy:
-  - git config --global user.email 'travis@travis-ci.com'
-  - git config --global user.name 'Travis CI'
-  - git checkout $TRAVIS_BRANCH
-  - git add --all
-  - git commit -am "Travis commit"
+- git config --global user.email 'travis@travis-ci.com'
+- git config --global user.name 'Travis CI'
+- git checkout $TRAVIS_BRANCH
+- git add --all
+- git commit -am "Travis commit"
 deploy:
   provider: openshift
   user: eduardogml.webmaster@gmail.com
   password:
-    secure: MhfDcXFUgwStCWGzuKkmAQbaARmUsu/X5a6zRbhG/MXREA0uchbbPZJypg3PKMfi/5T24McwMSm+s8F5gQs9VWGYPjNTYJDeeYXEvV4Mz9Uivw6H3peP/Vmar1ChAK22ShyL4ccBjUkNkYoGNBGWtbEJoceN0oGsSemC+IzsLzrrMHMzP2FyV2KObbU16gtO/AlgDOBaRNKcKjYm9YqDtxoeMhbFRL0hRSzARXbLj8ACHeJiFWXs1PPEhJCMRi0lRtK+aG4mae+APIU5jP/dLa6e7Fz4JNDoO0ZPTPFegPOiJFO2LNGg2dGfEyTREeW/2dylU7MvgYWbDiFVfcow5iCB7CVB6ZDGQRqeveJv9Ce/0JSAFbOmsGj5VQEgFy1l3kWtdI62pA33uc4pMEs4JVk86CxmakmAiUi9rJ4FfPjiMKorcufzV8NgL6HZ20rhy3QdZ3fHyVUD18YfSFZ4u2yesztD0CjOji3SVHMkKKd8lcQ6Ei4DVFGxiyh351CvL5B9XLJOeaivDl1AayqjGSKvOmTh7/4p+Rd/aMCFqsclzWijYYHWEuKNeC8o5/2w+s/+KYpyCuOloRZAtdJGBuXGZQ85/6LahK8JGj9B+sl+JEtPLER5r9NTtJvZeP2n404IXCGpN0Aj6Kf8ztkOpRcSYi2In0rhIUFwIgcWwVg=
+    secure: jaDaYpvL8Xbm+G+jGRltgKZHNhzgeaP8utB/yAFTxBkarYnXPF2DvxBA4VPON+4/GPrB1/P5RLEg+CftFGVUnZmyc6orjkPSslBH75ewMWg30D6vMFB3GHV3HxHvf358Vhi/uklUkoWaAKq+yuAJB/fx5qITwLexxV6tZY4UD2WWMp/+1shd9EmfbX6P6wet3gF3JICUGjjhw1WSpafAdWARSKPAFwPZnbB4BbJl766cL7aqpJ/EpSZAS+P59BwUPrwdFLp6XtTpaAvxT/HK/C/lojFOr4Njp2R2w6SY0AyabT24XuPEX6XLgWoAR1hoNeLw/eUtR+jqVKE8/Z6ub+3jK4ugHumDc1KlWO8DTqJ71DozNOo8v8Hp7v3Wa9f/q+NUtVuthgxBAJH2ZwqVfyYx8bCw07G4Ow0ymThzy5A8ItT2bYCYNT8zkd5BOQXcC9yRGN8jXtjuPJK1qGk4tEHGqhefPFXOkAM6TzlzrTyQUdVuhCnl9qG2z6nkvKpw2whqT8Ru2Ib2kgBhlYGVHeSfilzT/xCXOWjg5LELVCv4McmtvSZ+ZywALGBtzAUAwG9oY0+4wjb6D2tWaFRFOc0rPE0x8+8QZeqpWL3i18D7R9Y9pq5KLnxtB61z6O6V1eUnrmd+ZylKi6T68ohQsirFeF/0NE6gVaXpWNgxi3M=
   app: applq
   domain: plantaqui
   on:
