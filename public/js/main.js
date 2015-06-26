@@ -24,4 +24,6 @@ angular.module('applq', ['ngRoute', 'ngResource']).config(function($routeProvide
       templateUrl: 'partials/sorteio.html',
       controller: 'SorteioController'
     });
+
+    $routeProvider.otherwise({redirectTo: '/'});
 });
