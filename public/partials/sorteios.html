@@ -1,0 +1,29 @@
+<h3>Sorteios</h3>
+
+<p ng-show="mensagem.texto">
+    {{mensagem.texto}}
+</p>
+
+<p ng-show="sorteios.length">
+	Sorteios cadastrados: {{sorteios.length}}
+</p>
+<p class="text-info" ng-hide="sorteios.length">
+    Não há sorteios cadastradas
+</p>
+
+<div class="table-responsive">
+	<table class="table table-hover">
+	<tr>
+		<th>Data do Sorteio</th>
+		<th>Numeros Participantes</th>
+		<th class="text-center">Descarregar</th>
+	</tr>
+	<tr ng-repeat="sorteio in sorteios">
+		<td>
+        	<a ng-href="#/sorteio/{{sorteio._id}}">{{sorteio.data}}</a>
+      	</td>
+      	<td>{{sorteio.numeroParticipantes}}</td>
+      	<td class="text-center"><button class="btn btn-warning">Descarregar</buttom></td>
+	</tr>
+	</table>
+</div>

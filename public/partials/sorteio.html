@@ -1,0 +1,27 @@
+<h1 class="text-center">Sorteio</h1>
+<p ng-show="mensagem.texto">
+    {{mensagem.texto}}
+</p>
+<form ng-submit="salva()"
+	<div class="form-group">
+		<label for="data">Data do sorteio: {{sorteio.data}}</label>
+	</div>
+	<div class="form-group">
+		<label for="status">Status do sorteio: {{sorteio.status}}</label>
+	</div>
+	<div class="form-group">
+		<label for="created_at">Data de criação: {{sorteio.created_at}}</label>
+	</div>
+	<div class="form-group">
+		<label for="cupons">Cupons participantes</label>
+		<ul>
+			<li ng-repeat="cupon in sorteio.cupons">{{cupon.numero}} - {{cupon.created_at}}</li>
+		</ul>
+	</div>
+	<div>
+		<button type="submit" class="btn btn-primary">
+			Salvar
+		</button>
+		<a href="#/sorteios" class="btn btn-default">Voltar</a>
+	</div>
+</form>

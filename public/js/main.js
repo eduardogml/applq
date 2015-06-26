@@ -14,4 +14,14 @@ angular.module('applq', ['ngRoute', 'ngResource']).config(function($routeProvide
       templateUrl: 'partials/transaction.html',
       controller: 'TransactionController'
     });
+
+    $routeProvider.when('/sorteios', {
+      templateUrl: 'partials/sorteios.html',
+      controller: 'SorteiosController'
+    });
+
+    $routeProvider.when('/sorteio/:sorteioId', {
+      templateUrl: 'partials/sorteio.html',
+      controller: 'SorteioController'
+    });
 });
