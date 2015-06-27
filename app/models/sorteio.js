@@ -1,12 +1,13 @@
 var mongoose = require('mongoose');
 var findOrCreate = require('mongoose-findorcreate');
+var funcoes = require('./../helpers/funcoes.js');
 
 module.exports = function() {
   
   var schema = mongoose.Schema({
     data: {
       type: Date,
-      default: null
+      default: funcoes.proximoSorteio()
     },
     status: {
       type: String,
