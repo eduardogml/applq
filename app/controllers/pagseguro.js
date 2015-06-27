@@ -102,7 +102,7 @@ module.exports = function(app){
 						var numeroTelefone = '55' + result.transaction.sender[0].phone[0].areaCode[0] + result.transaction.sender[0].phone[0].number[0];
 						var email = result.transaction.sender[0].email[0];
 
-						if(result.transaction.status[0] == 3){
+						if(result.transaction.status[0] == 3 || result.transaction.status[0] == '3' ){
 							query = {id: result.transaction.code[0]};
 
 							Transactionid.findOne(query).exec().then(
