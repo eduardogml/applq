@@ -31,7 +31,7 @@ module.exports = function(app){
 		var objRetorno = {};
 
 		request({
-			url: sysconfig.pagseguroUrlCheckoutSandBox + sysconfig.emailTokenPagsegSandbox,
+			url: sysconfig.pagseguroUrlCheckout + sysconfig.emailTokenPagsegAmbReal,
 			method: 'POST',
 			headers: {
 				'Content-Type': 'application/xml; charset=UTF-8'
@@ -84,7 +84,7 @@ module.exports = function(app){
 		console.log('notificationCode :' + req.body.notificationCode);
 		var request = require('request');
 		request({
-			url: sysconfig.pagseguroUrlApiNotificacaoSandBox + req.body.notificationCode + sysconfig.emailTokenPagsegSandbox,
+			url: sysconfig.pagseguroUrlApiNotificacao + req.body.notificationCode + sysconfig.emailTokenPagsegAmbReal,
 			method: 'GET'
 		}, function(error, response, body){
 			if(error){
@@ -109,7 +109,7 @@ module.exports = function(app){
 								function(transactionid){
 									console.log('transaction_Id :' + transactionid._id);
 									console.log('transactionCuponsEnviados :' + transactionid.cuponsenviados);
-									if(true){ // !transactionid.cuponsenviados
+									if(!transactionid.cuponsenviados){ // !transactionid.cuponsenviados
 										var htmlEmail = require('./../helpers/htmlEmail.js');
 										console.log('[fun]proximoSorteio() :' + funcoes.proximoSorteio());
 
@@ -124,15 +124,10 @@ module.exports = function(app){
 
 										Sorteio.findOrCreate(query2, function(err, sort, created){
 											if(err) console.log(err);
-											var sorteio = null;
-											if(sort){
-												sorteio = sort;
-											}else{
-												sorteio = created;
-											}
-											console.log('[var]sorteio :' + sorteio);
-											console.log('[var]sort :' + sort);
+											var sorteio = sort;
 											console.log('[var]created :' + created);
+											console.log('[var]sorteio :' + sorteio);
+											
 											var cupons = funcoes.gerarCupons(numeros, sorteio);
 											var Cupon = app.models.cupon;
 											Cupon.create(cupons).then(
@@ -171,7 +166,7 @@ module.exports = function(app){
 	controller.consulta = function(req, res){
 		var request = require('request');
 		request({
-			url: sysconfig.pagseguroUrlApiConsultaSandBox + req.params.transId + sysconfig.emailTokenPagsegSandbox,
+			url: sysconfig.pagseguroUrlApiConsulta + req.params.transId + sysconfig.emailTokenPagsegAmbReal,
 			method: 'GET'
 		}, function(error, response, body){
 			if(error){
