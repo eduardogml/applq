@@ -97,6 +97,8 @@ module.exports = function(app){
 						console.log(err);
 						res.status(500).json(err);
 					}else{
+						console.log('transactionID :' + result.transaction.code[0]);
+						console.log('transactionStatus :' + result.transaction.status[0]);
 						var numeroTelefone = '55' + result.transaction.sender[0].phone[0].areaCode[0] + result.transaction.sender[0].phone[0].number[0];
 						var email = result.transaction.sender[0].email[0];
 
