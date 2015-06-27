@@ -31,7 +31,7 @@ module.exports = function(app){
 		var objRetorno = {};
 
 		request({
-			url: sysconfig.pagseguroUrlCheckout + sysconfig.emailTokenPagsegAmbReal,
+			url: sysconfig.pagseguroUrlCheckoutSandBox + sysconfig.emailTokenPagsegSandbox,
 			method: 'POST',
 			headers: {
 				'Content-Type': 'application/xml; charset=UTF-8'
@@ -84,7 +84,7 @@ module.exports = function(app){
 		console.log('notificationCode :' + req.body.notificationCode);
 		var request = require('request');
 		request({
-			url: sysconfig.pagseguroUrlApiNotificacao + req.body.notificationCode + sysconfig.emailTokenPagsegAmbReal,
+			url: sysconfig.pagseguroUrlApiNotificacaoSandBox + req.body.notificationCode + sysconfig.emailTokenPagsegSandbox,
 			method: 'GET'
 		}, function(error, response, body){
 			if(error){
@@ -170,7 +170,7 @@ module.exports = function(app){
 	controller.consulta = function(req, res){
 		var request = require('request');
 		request({
-			url: sysconfig.pagseguroUrlApiConsulta + req.params.transId + sysconfig.emailTokenPagsegAmbReal,
+			url: sysconfig.pagseguroUrlApiConsultaSandBox + req.params.transId + sysconfig.emailTokenPagsegSandbox,
 			method: 'GET'
 		}, function(error, response, body){
 			if(error){
