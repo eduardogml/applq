@@ -183,12 +183,70 @@ module.exports = function(app){
 						console.log(err);
 						res.status(500).json(err);
 					}else{
-						console.log(result.transaction.sender[0].phone[0].areaCode[0]);
-						console.log(result.transaction.sender[0].phone[0].number[0]);
-						console.log(result.transaction.sender[0].email[0]);
-						console.log(result.transaction.status[0]);
-						console.log(result.transaction.code[0]);
-						res.send(result);
+						var code = result.transaction.code[0];
+						var status = result.transaction.status[0];
+						var numeroTelefone = '55' + result.transaction.sender[0].phone[0].areaCode[0] + result.transaction.sender[0].phone[0].number[0];
+						var email = result.transaction.sender[0].email[0];
+						console.log('transactionID :' + code);
+						console.log('transactionStatus :' + status + ', Tipo - ' + typeof(status));
+
+						if(status == '3'){
+							console.log('STATUS PAGO');
+							query = {id: code};
+							console.log('query: ' + query);
+
+							Transactionid.findOne(query).exec().then(
+								function(transactionid){
+									console.log('transaction_Id :' + transactionid._id);
+									console.log('transactionCuponsEnviados :' + transactionid.cuponsenviados);
+									if(!transactionid.cuponsenviados){ // !transactionid.cuponsenviados
+										var htmlEmail = require('./../helpers/htmlEmail.js');
+										console.log('[fun]proximoSorteio() :' + funcoes.proximoSorteio());
+
+										var tranid = transactionid._id;
+										var dataSorteio = funcoes.proximoSorteio();
+										var numeros = funcoes.gerarNumeros(transactionid.qtdmudas);
+										var emailParaEnvio = htmlEmail.emailDoSorteio(numeros);
+
+										var Sorteio = app.models.sorteio;
+										var query2 = {data: {$gte: dataSorteio}};
+										console.log('Data proximo sorteio :' + dataSorteio);
+
+										Sorteio.findOrCreate(query2, function(err, sort, created){
+											if(err) console.log(err);
+											var sorteio = sort;
+											console.log('[var]created :' + created);
+											console.log('[var]sorteio :' + sorteio);
+											
+											var cupons = funcoes.gerarCupons(numeros, sorteio);
+											var Cupon = app.models.cupon;
+											Cupon.create(cupons).then(
+												function(cupon) {
+													var transacao = {cupons: cupon, cuponsenviados: true};
+													Transactionid.findByIdAndUpdate(tranid, transacao).exec().then(
+														function(transactionid0) {
+															console.log('CUPONS CRIADOS OK');
+															console.log(numeros);
+															for(var i = 0; i < numeros.length; i++){
+																funcoes.enviarSmsDirectCall(numeroTelefone, numeros[i], dataSorteio);
+															}
+															funcoes.enviarEmailDireto(email, emailParaEnvio);
+															res.send('OK');
+														},
+														function(erro) {
+															console.error(erro);
+														}
+														);
+												}, function(erro) {
+													console.log(erro);
+													res.status(500).json(erro);
+												});
+										}); // FIM Sorteio.findOrCreate(query2, function(err, sort, created)
+									} // FIM if(!enviadoCupom)
+								}, function(errPro0){
+										console.log(errPro0);
+								}); // FIM promise0.then(function(transactionid)
+						} // FIM do if(result.transaction.status[0] == 3)
 					}
 				});// FIM parseString()
 			}
