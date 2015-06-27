@@ -107,7 +107,7 @@ module.exports = function(app){
 
 							Transactionid.findOne(query).exec().then(
 								function(transactionid){
-									if(transactionid.cuponsenviados){
+									if(!transactionid.cuponsenviados){
 
 										var htmlEmail = require('./../helpers/htmlEmail.js');
 
