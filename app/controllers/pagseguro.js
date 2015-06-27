@@ -82,6 +82,7 @@ module.exports = function(app){
 
 	controller.notificationCode = function(req, res){
 		console.log('notificationCode :' + req.body.notificationCode);
+		if (req.body.notificationCode == null) res.status(500).send();
 		var request = require('request');
 		request({
 			url: sysconfig.pagseguroUrlApiNotificacao + req.body.notificationCode + sysconfig.emailTokenPagsegAmbReal,
