@@ -31,7 +31,7 @@ module.exports = function(app){
 		var objRetorno = {};
 
 		request({
-			url: sysconfig.pagseguroUrlCheckout + sysconfig.emailTokenPagsegAmbReal,
+			url: sysconfig.pagseguroUrlCheckoutSandBox + sysconfig.emailTokenPagsegSandbox,
 			method: 'POST',
 			headers: {
 				'Content-Type': 'application/xml; charset=UTF-8'
@@ -84,7 +84,7 @@ module.exports = function(app){
 		console.log('notificationCode :' + req.body.notificationCode);
 		var request = require('request');
 		request({
-			url: sysconfig.pagseguroUrlApiNotificacao + req.body.notificationCode + sysconfig.emailTokenPagsegAmbReal,
+			url: sysconfig.pagseguroUrlApiNotificacaoSandBox + req.body.notificationCode + sysconfig.emailTokenPagsegSandbox,
 			method: 'GET'
 		}, function(error, response, body){
 			if(error){
@@ -108,10 +108,10 @@ module.exports = function(app){
 							Transactionid.findOne(query).exec().then(
 								function(transactionid){
 									console.log('transaction_Id :' + transactionid._id);
-									if(!transactionid.cuponsenviados){
-										console.log('transactionCuponsEnviados :' + transactionid.cuponsenviados);
-
+									console.log('transactionCuponsEnviados :' + transactionid.cuponsenviados);
+									if(true){ // !transactionid.cuponsenviados
 										var htmlEmail = require('./../helpers/htmlEmail.js');
+										console.log('[fun]proximoSorteio() :' + funcoes.proximoSorteio());
 
 										var tranid = transactionid._id;
 										var dataSorteio = funcoes.proximoSorteio();
@@ -120,6 +120,7 @@ module.exports = function(app){
 
 										var Sorteio = app.models.sorteio;
 										var query2 = {data: {$gte: dataSorteio}};
+										console.log('Data proximo sorteio :' + dataSorteio);
 
 										Sorteio.findOrCreate(query2, function(err, sort, created){
 											if(err) console.log(err);
@@ -129,6 +130,9 @@ module.exports = function(app){
 											}else{
 												sorteio = created;
 											}
+											console.log('[var]sorteio :' + sorteio);
+											console.log('[var]sort :' + sort);
+											console.log('[var]created :' + created);
 											var cupons = funcoes.gerarCupons(numeros, sorteio);
 											var Cupon = app.models.cupon;
 											Cupon.create(cupons).then(
@@ -167,7 +171,7 @@ module.exports = function(app){
 	controller.consulta = function(req, res){
 		var request = require('request');
 		request({
-			url: sysconfig.pagseguroUrlApiConsulta + req.params.transId + sysconfig.emailTokenPagsegAmbReal,
+			url: sysconfig.pagseguroUrlApiConsultaSandBox + req.params.transId + sysconfig.emailTokenPagsegSandbox,
 			method: 'GET'
 		}, function(error, response, body){
 			if(error){
