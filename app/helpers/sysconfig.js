@@ -1,6 +1,6 @@
 var email = '?email=financeiro@trevosustentavel.com.br&';
 
-exports.emailTokenPagsegAmbReal = email + 'token=D3559CBB13D540298DB952CBFAEA08A4';
+exports.emailTokenPagsegAmbReal = email + 'token=6D02B987A1924DF099A204E2356688E5';
 exports.emailTokenPagsegSandbox = email + 'token=86B372F41C414668893110868BB66799';
 exports.emailTokenPagsegAmbRealRetornoAutomatico = 'token=????';
 
