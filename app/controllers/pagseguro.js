@@ -174,11 +174,18 @@ module.exports = function(app){
 				console.log(error);
 				res.status(500).json(error);
 			}else{
-				console.log(result.transaction);
-				console.log(result.transaction.items[0]);
-				console.log(result.transaction.items[0].item[0]);
-				console.log(result.transaction.items[0].item[0].quantity[0]);
-				res.end();
+				var parseString = require('xml2js').parseString;
+				parseString(body, function (err, result){
+					if(err){
+						console.log(err);
+					}else{
+						console.log(result.transaction);
+						console.log(result.transaction.items[0]);
+						console.log(result.transaction.items[0].item[0]);
+						console.log(result.transaction.items[0].item[0].quantity[0]);
+						res.end();
+					}
+				});
 			}
 		});// FIM request()
 	};// FIM controller.consulta()
