@@ -56,29 +56,7 @@ module.exports = function(app){
 			}
 		});// FIM request()
 
-	};// FIM controller.reqCode()
-
-	controller.saveTransId = function(req, res){
-		var dados = {
-			"id": req.body.id,
-			"qtdmudas": req.body.qtdmudas,
-			"facebookname": req.body.facebookname || null,
-			"facebookidapp": req.body.facebookidapp || null,
-			"facebookemail": req.body.facebookemail || null,
-			"facebooklink": req.body.facebooklink || null,
-			"cuponsenviados": false,
-			"cupons": null
-		};
-
-		Transactionid.create(dados).then(
-			function(transactionid){
-				res.status(201).json(transactionid);
-			}, 
-			function(erro){
-				console.log(erro);
-				res.status(500).json(erro);
-			}); // FIM Transactionid.create(dados)
-	};// FIM controller.saveTransId()
+	};
 
 	controller.notificationCode = function(req, res){
 		console.log('notificationCode :' + req.body.notificationCode);
@@ -157,33 +135,7 @@ module.exports = function(app){
 				});// FIM parseString()
 			}
 		});
-	};// FIM controller.notificationCode()
-
-	controller.consulta = function(req, res){
-		var request = require('request');
-		request({
-			url: sysconfig.pagseguroUrlApiConsulta + req.params.transId + sysconfig.emailTokenPagsegAmbReal,
-			method: 'GET'
-		}, function(error, response, body){
-			if(error){
-				console.log(error);
-				res.status(500).json(error);
-			}else{
-				var parseString = require('xml2js').parseString;
-				parseString(body, function (err, result){
-					if(err){
-						console.log(err);
-					}else{
-						console.log(result.transaction);
-						console.log(result.transaction.items[0]);
-						console.log(result.transaction.items[0].item[0]);
-						console.log(result.transaction.items[0].item[0].quantity[0]);
-						res.end();
-					}
-				});
-			}
-		});// FIM request()
-	};// FIM controller.consulta()
+	};
 
 	return controller;
 };
