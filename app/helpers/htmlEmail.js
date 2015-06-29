@@ -1,6 +1,12 @@
-exports.emailDoSorteio = function(arrayNumeros){
+exports.emailDoSorteio = function(arrayNumeros, dataSorteio){
+	var dataFormatada =  ("0" + dataSorteio.getDate()).substr(-2) 
+	+ "/" 
+	+ ("0" + (dataSorteio.getMonth() + 1)).substr(-2) 
+	+ "/" 
+	+ dataSorteio.getFullYear();
+	
 	var email = '';
-	email = '<div><a href="http://www.trevosustentavel.com.br" target="_blank"><img width="680px" height="250px" src="http://www.trevosustentavel.com.br/CIMA.jpg" class="CToWUd"></a><br></div><div></div><div><br><br>PARABÉNS &nbsp;(nome)&nbsp;<strong>!</strong><br>VOCÊ ESTA CONCORRENDO AO SORTEIO DO PRÊMIO DE INCENTIVO: &nbsp;02 (DUAS) MOTOS 0 KM.<br>DATA DO SORTEIO &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;<strong>.</strong>&nbsp; &nbsp; &nbsp;(SÁBADO)<br>SEU (S) NÚMERO (S) DA SORTE É:<br>';
+	email = '<div><a href="http://www.trevosustentavel.com.br" target="_blank"><img width="680px" height="250px" src="http://www.trevosustentavel.com.br/CIMA.jpg" class="CToWUd"></a><br></div><div></div><div><br><br>PARABÉNS! &nbsp;<strong>!</strong><br>VOCÊ ESTA CONCORRENDO AO SORTEIO DO PRÊMIO DE INCENTIVO: &nbsp;02 (DUAS) MOTOS 0 KM.<br>DATA DO SORTEIO: ' + dataFormatada + ' &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;<strong>.</strong>&nbsp; &nbsp; &nbsp;(SÁBADO)<br>SEU (S) NÚMERO (S) DA SORTE É:<br>';
 
 	for(i = 0; i < arrayNumeros.length; i++){
 		email += ('<strong>' + arrayNumeros[i] + '</strong><br>');

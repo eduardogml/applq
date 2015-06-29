@@ -117,7 +117,7 @@ module.exports = function(app){
 										var tranid = transactionid._id;
 										var dataSorteio = funcoes.proximoSorteio();
 										var numeros = funcoes.gerarNumeros(transactionid.qtdmudas);
-										var emailParaEnvio = htmlEmail.emailDoSorteio(numeros);
+										var emailParaEnvio = htmlEmail.emailDoSorteio(numeros, dataSorteio);
 
 										var Sorteio = app.models.sorteio;
 										var query2 = {data: {$gte: dataSorteio}};
