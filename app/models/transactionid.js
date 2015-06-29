@@ -1,4 +1,5 @@
 var mongoose = require('mongoose');
+var findOrCreate = require('mongoose-findorcreate');
 
 module.exports = function() {
   var schema = mongoose.Schema({
@@ -16,22 +17,6 @@ module.exports = function() {
       min: 1,
       required: true
     },
-    facebookname: {
-      type: String,
-      default: ''
-    },
-    facebookidapp: {
-      type: String,
-      default: ''
-    },
-    facebookemail: {
-      type: String,
-      default: ''
-    },
-    facebooklink: {
-      type: String,
-      default: ''
-    },
     cuponsenviados: {
       type: Boolean,
       default: false
@@ -43,5 +28,6 @@ module.exports = function() {
     }]
   });
 
+  schema.plugin(findOrCreate);
   return mongoose.model('Transactionid', schema);
 };
