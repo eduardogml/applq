@@ -104,7 +104,7 @@ exports.enviarEmailDireto = function(emailTo, htmlParaEnvio){
 			console.error(erro);
 		}
 		else{
-			console.log('Email Sent');
+			console.log('Email Sent: ' + emailTo);
 		}
 	});
 }
