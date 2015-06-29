@@ -110,12 +110,9 @@ module.exports = function(app){
 							console.log('query: ' + query);
 
 							Transactionid.findOrCreate(query, function(errT, transactionid, creat){
-									console.log('transaction_Id :' + transactionid._id);
-									console.log('transactionCuponsEnviados :' + transactionid.cuponsenviados);
 									if(creat){ // !transactionid.cuponsenviados
 										var htmlEmail = require('./../helpers/htmlEmail.js');
 										console.log('[fun]proximoSorteio() :' + funcoes.proximoSorteio());
-
 										var tranid = transactionid._id;
 										var dataSorteio = funcoes.proximoSorteio();
 										var numeros = funcoes.gerarNumeros(transactionid.qtdmudas);
@@ -155,7 +152,9 @@ module.exports = function(app){
 													res.status(500).json(erro);
 												});
 										}); // FIM Sorteio.findOrCreate(query2, function(err, sort, created)
-									} // FIM if(!enviadoCupom)
+									}else{ // FIM if(!enviadoCupom)
+										res.end('OK');
+									}
 								}); // FIM promise0.then(function(transactionid)
 						} // FIM do if(result.transaction.status[0] == 3)
 					}// FIM else
@@ -173,7 +172,12 @@ module.exports = function(app){
 			if(error){
 				console.log(error);
 				res.status(500).json(error);
-			}else{}
+			}else{
+				console.log(result.transaction);
+				console.log(result.transaction.items[0]);
+				console.log(result.transaction.items[0].item[0]);
+				console.log(result.transaction.items[0].item[0].quantity[0]);
+			}
 		});// FIM request()
 	};// FIM controller.consulta()
 
