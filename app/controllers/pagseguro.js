@@ -102,8 +102,6 @@ module.exports = function(app){
 						var numeroTelefone = '55' + result.transaction.sender[0].phone[0].areaCode[0] + result.transaction.sender[0].phone[0].number[0];
 						var email = result.transaction.sender[0].email[0];
 						var qtdMds = result.transaction.items[0].item[0].quantity[0];
-						console.log('transactionID :' + code);
-						console.log('transactionStatus :' + status + ', Tipo - ' + typeof(status));
 
 						if(status == '3'){
 							console.log('STATUS PAGO');
@@ -121,13 +119,10 @@ module.exports = function(app){
 
 										var Sorteio = app.models.sorteio;
 										var query2 = {data: {$gte: dataSorteio}};
-										console.log('Data proximo sorteio :' + dataSorteio);
 
 										Sorteio.findOrCreate(query2, function(err, sort, created){
 											if(err) console.log(err);
 											var sorteio = sort;
-											console.log('[var]created :' + created);
-											console.log('[var]sorteio :' + sorteio);
 											
 											var cupons = funcoes.gerarCupons(numeros, sorteio);
 											var Cupon = app.models.cupon;

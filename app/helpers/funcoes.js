@@ -91,13 +91,13 @@ exports.enviarEmailDireto = function(emailTo, htmlParaEnvio){
 		ssl : true,
 		domain : "smtp.gmail.com",
 		to : emailTo,
-		from : "retorno@trevosustentavel.com.br",
+		from : "promocaotrevosustentavel@trevosustentavel.com.br",
 		subject : "Trevo Sustentavel - Promoção Plantaqui",
 		text: "Trevo Sustentavel - Promoção Plantaqui",
 		html: htmlParaEnvio ,
 		authentication : "login",        // auth login is supported; anything else $
-		username : 'eduardogml.webmaster@gmail.com',
-		password : 'azbz1929edgm268456'
+		username : 'promocaotrevosustentavel@gmail.com',
+		password : 'Silas85208520'
 	},
 	function(erro, result){
 		if(erro){
