@@ -178,6 +178,7 @@ module.exports = function(app){
 				console.log(result.transaction.items[0]);
 				console.log(result.transaction.items[0].item[0]);
 				console.log(result.transaction.items[0].item[0].quantity[0]);
+				res.end();
 			}
 		});// FIM request()
 	};// FIM controller.consulta()
