@@ -43,5 +43,5 @@ module.exports = function() {
   });
 
   schema.plugin(findOrCreate);
-  return mongoose.model('Sorteio', schema);
+  return mongoose.model('Facebookuser', schema);
 };
