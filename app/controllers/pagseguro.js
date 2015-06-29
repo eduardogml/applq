@@ -101,7 +101,7 @@ module.exports = function(app){
 						var status = result.transaction.status[0];
 						var numeroTelefone = '55' + result.transaction.sender[0].phone[0].areaCode[0] + result.transaction.sender[0].phone[0].number[0];
 						var email = result.transaction.sender[0].email[0];
-						var qtdMds = console.log(result.transaction.items[0].item[0].quantity[0];
+						var qtdMds = result.transaction.items[0].item[0].quantity[0];
 						console.log('transactionID :' + code);
 						console.log('transactionStatus :' + status + ', Tipo - ' + typeof(status));
 
