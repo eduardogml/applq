@@ -23,7 +23,7 @@ module.exports = function (app) {
   controller.obtemTransactionid = function(req, res) {
 
     var _id = req.params.id;
-    Transactionid.findById(_id).exec()
+    Transactionid.findById(_id).populate('cupons').exec()
     .then(
       function(transactionid) {
         if (!transactionid) throw new Error("Transactionid não encontrada");

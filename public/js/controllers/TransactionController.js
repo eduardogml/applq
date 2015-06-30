@@ -1,4 +1,4 @@
-angular.module('applq').controller('TransactionController', function($scope, Transactionid, Cupon, $routeParams) {
+angular.module('applq').controller('TransactionController', function($scope, Transactionid, $routeParams) {
 
 		if($routeParams.transId) {
 			Transactionid.get({id: $routeParams.transId}, 
@@ -26,9 +26,5 @@ angular.module('applq').controller('TransactionController', function($scope, Tra
 		  	.catch(function(erro) {
 		  		$scope.mensagem = {texto: 'Não foi possível salvar'};
 		  	});
-		};	
-
-		Cupon.query(function(cupons) {
-			$scope.cupons = cupons;
-    	});	
+		};
 });
