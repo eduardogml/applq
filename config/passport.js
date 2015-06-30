@@ -14,9 +14,8 @@ module.exports = function() {
 		callbackURL: 'http://localhost:3000/auth/github/callback'
 	}, function(accessToken, refreshToken, profile, done) {
 		
-		Usuario.findOrCreate(
-			{ "login" : profile.username}, 
-			{ "nome" : profile.username},  
+		Usuario.findOne(
+			{ "login" : profile.username, "nome" : profile.username},  
 			function(erro, usuario) {
 				if(erro) {
 					return done(erro);
