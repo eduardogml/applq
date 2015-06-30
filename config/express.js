@@ -21,19 +21,15 @@ module.exports = function(){
     app.use(require('method-override')());
     
     app.use(cookieParser());
-    app.use(session({ secret: 'applqsistema'}));
+    app.use(session(
+      { secret: 'application plantaqui', 
+        resave: true, 
+        saveUninitialized: true 
+      }
+    ));
+    
     app.use(passport.initialize());
     app.use(passport.session());
-
-    passport.serializeUser(function(user, done){
-      done(null, user._id);
-    });
-
-    passport.deserializeUser(function(id, done){
-      User.findById(id, function(err, user){
-        done(err, user);
-      });
-    });
 
     app.use(cors());
 

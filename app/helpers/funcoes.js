@@ -1,3 +1,11 @@
+exports.verificaAutenticacao = function (req, res, next){
+	if(req.isAuthenticated()) {
+		return next();
+	}else{
+		res.status('401').json('Não autorizado');
+	}
+}
+
 exports.proximoSorteio = function (){
 	var moment = require('moment');
 	var dataObj = new Date(

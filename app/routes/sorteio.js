@@ -1,12 +1,12 @@
+var funcoes = require('./../helpers/funcoes.js');
+
 module.exports = function (app) {
 	
   var controller = app.controllers.sorteio;
 
   app.route('/sorteios')
-  	.get(controller.listaSorteios)
-  	.post()
+  	.get(funcoes.verificaAutenticacao, controller.listaSorteios);
 
   app.route('/sorteios/:id')
-	.get(controller.obtemSorteio)
-	.delete();
+	.get(funcoes.verificaAutenticacao, controller.obtemSorteio);
 };

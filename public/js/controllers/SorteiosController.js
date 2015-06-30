@@ -3,6 +3,8 @@ angular.module('applq').controller('SorteiosController', function($scope, Sortei
 
 	$scope.mensagem = {texto: ''};
 
+  $scope.descarregar = function(idsorteio){};
+
 	function buscaSorteios() {
       Sorteio.query(
         function(sorteios) {

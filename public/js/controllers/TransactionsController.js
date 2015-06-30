@@ -1,4 +1,4 @@
-angular.module('applq').controller('TransactionsController', function($scope, Transactionid){
+angular.module('applq').controller('TransactionsController', function($scope, Transactionid, $routeParams){
 	$scope.transactionids = [];
 
 	$scope.mensagem = {texto: ''};
