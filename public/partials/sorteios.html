@@ -15,17 +15,15 @@
 	<table class="table table-hover">
 	<tr>
 		<th>Data do Sorteio</th>
-		<th class="text-center">Numeros Participantes</th>
-		<th class="text-center">Ganhadores</th>
-		<th class="text-center">Descarregar</th>
+		<th class="text-center">Status do Sorteio</th>
+		<th class="text-center">Resultado do Sorteio</th>
 	</tr>
 	<tr ng-repeat="sorteio in sorteios">
 		<td>
         	<a ng-href="#/sorteio/{{sorteio._id}}">{{sorteio.data}}</a>
       	</td>
-      	<td class="text-center">0</td>
-      	<td class="text-center"><a href="#" class="btn btn-warning">Cupons Ganhadores</buttom></a>
-      	<td class="text-center"><button ng-click="descarregar(sorteio._id)" class="btn btn-warning">Descarregar</buttom></td>
+      	<td class="text-center">{{sorteio.status}}</td>
+      	<td class="text-center">{{sorteio.resultado}}</td>
 	</tr>
 	</table>
 </div>
