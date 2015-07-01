@@ -11,7 +11,7 @@ module.exports = function() {
 	passport.use(new GitHubStrategy({
 		clientID: config.clientID,
 		clientSecret: config.clientSecret,
-		callbackURL: 'http://applq-makampaas.rhcloud.com/auth/github/callback'
+		callbackURL: config.callbackUrl
 	}, function(accessToken, refreshToken, profile, done) {
 		
 		Usuario.findOne(

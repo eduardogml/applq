@@ -7,6 +7,5 @@ module.exports = function (app) {
   	.post(controller.salvaCupon)
 
   app.route('/cupons/:id')
-	.get(controller.obtemCupon)
-	.delete(controller.removeCupon);
+	.get(controller.numerosParaSorteio);
 };

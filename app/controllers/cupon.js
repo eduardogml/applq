@@ -3,8 +3,28 @@ var sanitize = require('mongo-sanitize');
 module.exports = function (app) {
 
   var Cupon = app.models.cupon;
+  var Sorteio = app.models.sorteio;
 
   var controller = {}
+
+  controller.numerosParaSorteio = function(req, res){
+    var _idSorteio = req.params.id;
+
+    if(_idSorteio){
+      query = Cupon.find({the_sorteio: _idSorteio}).select('numero');
+
+      query.exec(function(err, numeros){
+        if(err){
+          res.status(500).json(err);
+        }else{
+          res.json(numeros);
+        }
+      });
+
+    }else{
+      res.status(404).end();
+    }
+  };
 
   controller.listaCupons = function(req, res) {
     

@@ -3,7 +3,7 @@ angular.module('applq').controller('SorteioController', function($scope, Sorteio
 		Sorteio.get({id: $routeParams.sorteioId},
 			function(sorteio) {
 				$scope.sorteio = sorteio;
-			}, 
+			},
 			function(erro) {
 				$scope.mensagem = {
 				texto: 'Sorteio não existe.'
