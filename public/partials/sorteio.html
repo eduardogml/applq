@@ -16,7 +16,7 @@
 		<button ng-show="sorteio.status=='ANDAMENTO'" type="submit" class="btn btn-primary">
 			Finalizar Sorteio
 		</button>
-		<button class="btn btn-primary">
+		<button ng-csv="sorteio.cupons" lazy-load="true" filename="{{ sorteio.data }}.csv" field-separator="," class="btn btn-primary">
 			Download da Lista de Números
 		</button>
 		<a href="#/sorteios" class="btn btn-default">

@@ -1,4 +1,4 @@
-angular.module('applq', ['ngRoute', 'ngResource']).config(function($routeProvider, $httpProvider){
+angular.module('applq', ['ngRoute', 'ngResource', 'ngSanitize', 'ngCsv']).config(function($routeProvider, $httpProvider){
 
   $httpProvider.interceptors.push('meuInterceptor');
 
