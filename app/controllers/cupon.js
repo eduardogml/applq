@@ -9,17 +9,14 @@ module.exports = function (app) {
 
   controller.numerosParaSorteio = function(req, res){
     var _idSorteio = req.params.id;
-    console.log(_idSorteio);
 
     if(_idSorteio){
       query = Cupon.find({the_sorteio: _idSorteio}).select('numero');
 
       query.exec(function(err, numeros){
         if(err){
-          console.log(err);
           res.status(500).json(err);
         }else{
-          console.log(numeros);
           res.json(numeros);
         }
       });
