@@ -14,8 +14,8 @@ module.exports = function() {
 		callbackURL: config.callbackUrl
 	}, function(accessToken, refreshToken, profile, done) {
 		
-		Usuario.findOne(
-			{ "login" : profile.username, "nome" : profile.username},  
+		Usuario.findOrCreate(
+			{ "login" : profile.username }, { "nome" : profile.username},
 			function(erro, usuario) {
 				if(erro) {
 					return done(erro);
