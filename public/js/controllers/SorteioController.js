@@ -3,6 +3,13 @@ angular.module('applq').controller('SorteioController', function($scope, Sorteio
 		Sorteio.get({id: $routeParams.sorteioId},
 			function(sorteio) {
 				$scope.sorteio = sorteio;
+				Cupon.query({id: $scope.sorteio._id}, 
+					function(cupons){
+						$scope.sorteio.cupons = cupons;
+					}, 
+					function(err){
+						console.log(err);
+					});
 			},
 			function(erro) {
 				$scope.mensagem = {
